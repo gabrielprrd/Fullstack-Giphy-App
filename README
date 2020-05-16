@@ -1,0 +1,24 @@
+#The Giphy App: Complete Version
+
+I should find a more creative name. Maybe take the little ghost as the mascot.
+
+The project's idea is to recreate one of my first websites, but with updated syntax, way better practices and a backend in node.js to add more features.
+
+##Backend:
+- I have to organize way better mainly the server's routes
+- Connects the front with the database
+- Authentication
+
+##Frontend:
+To make the front end the most impressive possible, I'll take some ideas from the freefrontend website and maybe from the awwwards, but I'll make them only by myself so I can improve my css skills.
+IMPORTANT: check if it's reasonable do it with styled-components
+https://freefrontend.com/javascript-input-text/
+
+- First I'll reorganiza the whole folder structure so it has a pattern that can be maintenable
+- Probably I can use a useContext hook to share the gifs state globally so it wil be easier to access them on the user's saved gifs page
+- For the authorization on react, maybe I can use Formik and then connect it with my controllers on the server.
+
+Tarefas do dia:
+
+- Organizar pastas do backend
+- Integrar os formulários
