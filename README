@@ -20,5 +20,5 @@ https://freefrontend.com/javascript-input-text/
 
 Tarefas do dia:
 
-- Organizar pastas do backend
-- Integrar os formulários
+- Alguma coisa está errada no state que vai uma query atrasada. Provavelmente o erro tá no useEffect (ler https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies)
+- Integrar os formulários com unform. Se der errado, usar o formik

@@ -1,6 +1,14 @@
-// const express = require('express');
-// const router = express.Router();
+// Dynamic routing
+// Adds all files from this 'routes' folder
+const express = require('express');
+const router = express.Router();
+const fs = require('fs');
+const path = require('path');
 
-// toda vez que a query muda, eu preciso mandar ela pra cá e o backend precisa mandar ela de volta. Então acho que usaremos useEffect().
+fs.readdirSync(__dirname)
+  // filters files that are not this one or special ones like .env or .gitnore etc.
+  .filter((file) => file.indexOf('.') !== 0 && file !== 'index.js')
+  // requires those files and passes the app
+  .forEach((file) => router.use('/', require(path.resolve(__dirname, file))));
 
-//futuramnte eu coloco essa requisição num arquivo separado de depois importo tudo aqui
+module.exports = router;

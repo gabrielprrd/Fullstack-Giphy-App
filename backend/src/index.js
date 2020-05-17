@@ -2,10 +2,8 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const path = require('path');
-const mongoose = require('./database/db');
-const fetch = require('node-fetch');
+const mongoose = require('./database');
 const cors = require('cors');
-const router = express.Router();
 
 // Enviroment variables that can't be shown on git
 const result = require('dotenv').config();
@@ -37,25 +35,12 @@ app.engine(
 );
 app.set('view engine', 'handlebars');
 
+// Routes
+app.use(require(path.join(__dirname, 'routes', 'index')));
+// app.use(require(path.join(__dirname, 'routes', 'results')));
+
 // Controllers
 require(path.join(__dirname, 'controllers', 'index'))(app);
-
-// Routes
-let gifsObject = undefined;
-app
-  .route('/results')
-  .post(async (req, res) => {
-    const apiKey = process.env.API_KEY;
-    const { query } = req.body;
-    const endpoint = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${query}&limit=25&offset=0&rating=G&lang=en`;
-
-    let result = await fetch(endpoint);
-    let response = await result.json();
-    gifsObject = response;
-  })
-  .get(async (req, res) => {
-    await res.send(gifsObject);
-  });
 
 // Running server
 const PORT = process.env.PORT || 5000;
