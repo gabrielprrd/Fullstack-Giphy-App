@@ -52,7 +52,7 @@ export default function Signin() {
     }
   }
   return (
-    <div className="page-container">
+    <div className="container">
       <Form ref={formRef} onSubmit={handleSubmit}>
         <Input name="name" />
         <Input type="email" name="email" />

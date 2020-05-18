@@ -14,9 +14,7 @@ IMPORTANT: check if it's reasonable do it with styled-components
 https://freefrontend.com/javascript-input-text/
 
 - I'll only start the css part when I totally finish the funtionality part. Front and backend.
-- For the authorization on react,i'm using unform and I will connect it with my controllers on the server with post requests
 
 Tarefas do dia:
 
 - Alguma coisa está errada no state que vai uma query atrasada. Provavelmente o erro tá no useEffect (ler https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies)
-- Integrar os formulários com unform

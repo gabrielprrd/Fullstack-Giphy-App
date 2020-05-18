@@ -1,35 +1,44 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
+import { Form } from "@unform/web";
 import axios from "axios";
+import * as Yup from "yup";
 
 //components
 import { GifsContext } from "../../store/index";
 import GifsResult from "./GifsResult/index";
+import Input from "../../components/Form/Input";
 
 export default function Home() {
-  const { setGifs } = useContext(GifsContext);
-  const [query, setQuery] = useState("");
+  const formRef = useRef(null);
+  const { gifs, setGifs } = useContext(GifsContext);
+  // const [query, setQuery] = useState("");
   const [reqStatus, setReqStatus] = useState({ isReqSent: false });
 
   // Retrieves form data and calls the ajax request to send it to server
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  async function handleSubmit(data, { reset }) {
+    try {
+      setReqStatus({ isReqSent: true });
 
-    setReqStatus({ isReqSent: true });
-    const payload = {
-      query: query,
-    };
-    handleAjaxRequest(payload);
-    setQuery(""); // clean the input
-  };
+      const schema = Yup.object().shape({
+        query: Yup.string().required("Please type something"),
+      });
 
-  // Sends the query data to backend so it can be used on the giphy's endpoint
-  const handleAjaxRequest = (payload) => {
-    axios({
-      method: "post",
-      url: "http://localhost:5000/results/",
-      data: payload,
-    });
-  };
+      // Sends the query data to backend so it can be used on the giphy's endpoint
+      const handleAjaxRequest = (data) => {
+        axios({
+          method: "post",
+          url: "http://localhost:5000/results/",
+          data: data,
+        });
+      };
+      handleAjaxRequest(data);
+
+      // Cleans the input fiels
+      reset();
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   // Retrieves the result fetched from the giphy's endpoint
   useEffect(() => {
@@ -42,24 +51,23 @@ export default function Home() {
       }
     };
     fetchFromServer();
-  }, [reqStatus]);
+  }, [gifs]);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} method="POST" action="/results">
-        <input
-          type="text"
-          name="search"
-          required
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
+    <div className="container">
+      <Form
+        ref={formRef}
+        onSubmit={handleSubmit}
+        method="POST"
+        action="/results"
+      >
+        <Input name="query" />
         <select>
           <option value="gifs">Gif</option>
           <option value="stickers">Sticker</option>
         </select>
-        <input type="submit" value="Search gifs" />
-      </form>
+        <button type="submit">Search Gifs</button>
+      </Form>
 
       {/* If the request was sent to the server, it renders the gifs */}
       {reqStatus.isReqSent && <GifsResult />}
