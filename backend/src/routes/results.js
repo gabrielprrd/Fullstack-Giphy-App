@@ -8,12 +8,16 @@ router
   .post(async (req, res) => {
     try {
       const apiKey = process.env.API_KEY;
-      const { query } = req.body;
-      const endpoint = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${query}&limit=25&offset=0&rating=G&lang=en`;
+      console.log(req.body)
+      const { query } = req.body.data;
+      const { select } = req.body;
+      
+      const endpoint = `https://api.giphy.com/v1/${select}/search?api_key=${apiKey}&q=${query}&limit=25&offset=0&rating=G&lang=en`;
 
       let result = await fetch(endpoint);
       let response = await result.json();
       gifsObject = response;
+      console.log(endpoint)
     } catch (err) {
       throw new Error(err);
     }

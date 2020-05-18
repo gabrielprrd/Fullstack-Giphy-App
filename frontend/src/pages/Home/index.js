@@ -11,15 +11,15 @@ import Input from "../../components/Form/Input";
 export default function Home() {
   const formRef = useRef(null);
   const { gifs, setGifs } = useContext(GifsContext);
-  // const [query, setQuery] = useState("");
   const [reqStatus, setReqStatus] = useState({ isReqSent: false });
+  const [select, setSelect] = useState("gifs");
 
   // Retrieves form data and calls the ajax request to send it to server
   async function handleSubmit(data, { reset }) {
     try {
       setReqStatus({ isReqSent: true });
 
-      const schema = Yup.object().shape({
+      Yup.object().shape({
         query: Yup.string().required("Please type something"),
       });
 
@@ -28,7 +28,7 @@ export default function Home() {
         axios({
           method: "post",
           url: "http://localhost:5000/results/",
-          data: data,
+          data: { data, select },
         });
       };
       handleAjaxRequest(data);
@@ -38,6 +38,10 @@ export default function Home() {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  function handleSelectChange(imgType) {
+    setSelect(imgType);
   }
 
   // Retrieves the result fetched from the giphy's endpoint
@@ -61,10 +65,13 @@ export default function Home() {
         method="POST"
         action="/results"
       >
-        <Input name="query" />
-        <select>
-          <option value="gifs">Gif</option>
-          <option value="stickers">Sticker</option>
+        <Input name="query" required />
+        <select
+          name="imgType"
+          onChange={(e) => handleSelectChange(e.target.value)}
+        >
+          <option value="gifs">Gifs</option>
+          <option value="stickers">Stickers</option>
         </select>
         <button type="submit">Search Gifs</button>
       </Form>
