@@ -5,7 +5,6 @@ I should find a more creative name. Maybe take the little ghost as the mascot.
 The project's idea is to recreate one of my first websites, but with updated syntax, way better practices and a backend in node.js to add more features.
 
 ##Backend:
-- I have to organize way better mainly the server's routes
 - Connects the front with the database
 - Authentication
 
@@ -14,11 +13,10 @@ To make the front end the most impressive possible, I'll take some ideas from th
 IMPORTANT: check if it's reasonable do it with styled-components
 https://freefrontend.com/javascript-input-text/
 
-- First I'll reorganiza the whole folder structure so it has a pattern that can be maintenable
-- Probably I can use a useContext hook to share the gifs state globally so it wil be easier to access them on the user's saved gifs page
-- For the authorization on react, maybe I can use Formik and then connect it with my controllers on the server.
+- I'll only start the css part when I totally finish the funtionality part. Front and backend.
+- For the authorization on react,i'm using unform and I will connect it with my controllers on the server with post requests
 
 Tarefas do dia:
 
 - Alguma coisa está errada no state que vai uma query atrasada. Provavelmente o erro tá no useEffect (ler https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies)
-- Integrar os formulários com unform. Se der errado, usar o formik
+- Integrar os formulários com unform

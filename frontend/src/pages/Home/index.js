@@ -6,9 +6,9 @@ import { GifsContext } from "../../store/index";
 import GifsResult from "./GifsResult/index";
 
 export default function Home() {
-  const { gifs, setGifs } = useContext(GifsContext);
+  const { setGifs } = useContext(GifsContext);
   const [query, setQuery] = useState("");
-  const [reqStatus, setReqStatus] = useState({ isReqSent: false,  });
+  const [reqStatus, setReqStatus] = useState({ isReqSent: false });
 
   // Retrieves form data and calls the ajax request to send it to server
   const handleSubmit = (e) => {
@@ -36,11 +36,10 @@ export default function Home() {
     const fetchFromServer = async () => {
       try {
         let response = await axios.get("http://localhost:5000/results/");
-        await setGifs(response.data.data);
+        return setGifs(response.data.data);
       } catch (err) {
         throw new Error(err);
       }
-
     };
     fetchFromServer();
   }, [reqStatus]);

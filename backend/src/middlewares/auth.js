@@ -1,3 +1,4 @@
+// Middleware responsible for validating Json Web Tokens
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {

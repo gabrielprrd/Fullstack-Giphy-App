@@ -37,7 +37,6 @@ app.set('view engine', 'handlebars');
 
 // Routes
 app.use(require(path.join(__dirname, 'routes', 'index')));
-// app.use(require(path.join(__dirname, 'routes', 'results')));
 
 // Controllers
 require(path.join(__dirname, 'controllers', 'index'))(app);
