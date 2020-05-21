@@ -1,17 +1,20 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import axios from 'axios';
-
+import { useHistory } from 'react-router-dom'
 import { AuthContext } from '../../store/AuthProvider';
 
 export default function Header() {
   const { isAuth } = useContext(AuthContext);
+  const history = useHistory();
 
   async function handleClick() {
     axios({
       method: 'post',
       url: 'http://localhost:5000/auth/logout',
     })
+    await history.push("/login");
+    await window.location.reload();
   }
 
   return (

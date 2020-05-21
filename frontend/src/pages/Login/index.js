@@ -1,5 +1,5 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { Form } from "@unform/web";
 import * as Yup from "yup";
 import axios from "axios";
@@ -11,6 +11,7 @@ export default function Login(props) {
   const { from } = props.location.state || { from: { pathname: "/" } };
   const formRef = useRef(null);
   const { isAuth } = useContext(AuthContext);
+  const history = useHistory();
 
   async function handleSubmit(data, { reset }) {
     try {
@@ -30,12 +31,15 @@ export default function Login(props) {
       });
 
       // Sends data to backend as a post request
-      const handleAuthentication = (data) => {
+      const handleAuthentication = async (data) => {
         axios({
           method: "post",
           url: "http://localhost:5000/auth/authenticate/",
           data: data,
         });
+
+        await history.push("/");
+        await window.location.reload();
       };
       handleAuthentication(data);
 

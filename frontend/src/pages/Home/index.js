@@ -79,7 +79,6 @@ export default function Home() {
       </Form>
 
       {/* If the request was sent to the server, it renders the gifs */}
-      {isAuth && <h1>User authenticated</h1>}
       {reqStatus.isReqSent && <GifsResult isReqSent={reqStatus.isReqSent}/>}
     </div>
   );
