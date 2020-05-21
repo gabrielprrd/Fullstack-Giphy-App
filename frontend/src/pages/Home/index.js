@@ -4,13 +4,15 @@ import axios from "axios";
 import * as Yup from "yup";
 
 //components
-import { GifsContext } from "../../store/index";
+import { GifsContext } from "../../store/GifsProvider";
+import { AuthContext } from "../../store/AuthProvider";
 import GifsResult from "./GifsResult/index";
 import Input from "../../components/Form/Input";
 
 export default function Home() {
   const formRef = useRef(null);
   const { gifs, setGifs } = useContext(GifsContext);
+  const { isAuth } = useContext(AuthContext);
   const [reqStatus, setReqStatus] = useState({ isReqSent: false });
   const [select, setSelect] = useState("gifs");
 
@@ -77,7 +79,8 @@ export default function Home() {
       </Form>
 
       {/* If the request was sent to the server, it renders the gifs */}
-      {reqStatus.isReqSent && <GifsResult />}
+      {isAuth && <h1>User authenticated</h1>}
+      {reqStatus.isReqSent && <GifsResult isReqSent={reqStatus.isReqSent}/>}
     </div>
   );
 }

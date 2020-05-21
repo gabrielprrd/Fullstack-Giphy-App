@@ -1,4 +1,4 @@
-// all global state for the application
+// Provides the gifs globally
 import React, { useState, createContext } from "react";
 
 // Fetched gifs
