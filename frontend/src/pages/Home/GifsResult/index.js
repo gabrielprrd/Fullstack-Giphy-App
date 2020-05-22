@@ -1,10 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
-import { GifsContext } from "../../../store/GifsProvider";
 import axios from "axios";
 
-export default function GifsResult({ isReqSent }) {
+// Context
+import { GifsContext } from "../../../store/GifsProvider";
+import { AuthContext } from "../../../store/AuthProvider";
+
+export default function GifsResult({ isReqSent, query, select }) {
   const { gifs } = useContext(GifsContext);
+  const { isAuth } = useContext(AuthContext);
   const [savedGif, setSavedGif] = useState([]);
+  const [fetchedIncrementer, setFetchedIncrementer] = useState(2);
 
   function handleClick(item) {
     setSavedGif(item);
@@ -19,13 +24,28 @@ export default function GifsResult({ isReqSent }) {
   //   })
   // }
 
-  function showMoreGifs(){
-    
+  let incrementer = fetchedIncrementer
+
+  function showMoreGifs() {
+    try {
+      incrementer++
+      setFetchedIncrementer(incrementer);
+      const handleAjaxRequest = () => {
+        axios({
+          method: "post",
+          url: "http://localhost:5000/results",
+          data: { query, select, fetchedIncrementer },
+        });
+      };
+      handleAjaxRequest();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  useEffect(() => {
-    console.log(savedGif);
-  }, [savedGif]);
+  // useEffect(() => {
+  //   console.log(savedGif);
+  // }, [savedGif]);
 
   return (
     <div>
@@ -33,7 +53,7 @@ export default function GifsResult({ isReqSent }) {
         return (
           <div className="gif-container" key={item.id}>
             <img src={item.images.fixed_height.url} alt={item.title} />
-            <button onClick={(e) => handleClick(item)}>Save</button>
+            {isAuth && <button onClick={(e) => handleClick(item)}>Save</button>}
           </div>
         );
       })}

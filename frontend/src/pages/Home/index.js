@@ -5,14 +5,13 @@ import * as Yup from "yup";
 
 //components
 import { GifsContext } from "../../store/GifsProvider";
-import { AuthContext } from "../../store/AuthProvider";
 import GifsResult from "./GifsResult/index";
 import Input from "../../components/Form/Input";
 
 export default function Home() {
   const formRef = useRef(null);
   const { gifs, setGifs } = useContext(GifsContext);
-  const { isAuth } = useContext(AuthContext);
+  const [query, setQuery] = useState(""); // We need this query state to pass the query to the results component
   const [reqStatus, setReqStatus] = useState({ isReqSent: false });
   const [select, setSelect] = useState("gifs");
 
@@ -27,10 +26,12 @@ export default function Home() {
 
       // Sends the query data to backend so it can be used on the giphy's endpoint
       const handleAjaxRequest = (data) => {
+        let query = data.query
+        setQuery(query); // This is needed to pass the query as props to another component
         axios({
           method: "post",
           url: "http://localhost:5000/results/",
-          data: { data, select },
+          data: { query, select },
         });
       };
       handleAjaxRequest(data);
@@ -51,7 +52,7 @@ export default function Home() {
     const fetchFromServer = async () => {
       try {
         let response = await axios.get("http://localhost:5000/results/");
-        return setGifs(response.data.data);
+        setGifs(response.data.data);
       } catch (err) {
         throw new Error(err);
       }
@@ -79,7 +80,13 @@ export default function Home() {
       </Form>
 
       {/* If the request was sent to the server, it renders the gifs */}
-      {reqStatus.isReqSent && <GifsResult isReqSent={reqStatus.isReqSent}/>}
+      {reqStatus.isReqSent && (
+        <GifsResult
+          isReqSent={reqStatus.isReqSent}
+          query={query}
+          select={select}
+        />
+      )}
     </div>
   );
 }

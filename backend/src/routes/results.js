@@ -8,10 +8,14 @@ router
   .post(async (req, res) => {
     try {
       const apiKey = process.env.API_KEY;
-      const { query } = req.body.data;
-      const { select } = req.body;
+      const { select, fetchedIncrementer, query } = req.body;
 
-      const endpoint = `https://api.giphy.com/v1/${select}/search?api_key=${apiKey}&q=${query}&limit=25&offset=0&rating=G&lang=en`;
+      // Se o fetchedIncrement começar em 1, a lógica fica ainda mais simples (sem o if)
+      // Agora crio um state no front que incrementa baseado no número de clicks
+
+      let limit = 25*fetchedIncrementer;
+
+      const endpoint = `https://api.giphy.com/v1/${select}/search?api_key=${apiKey}&q=${query}&limit=${limit}&offset=0&rating=G&lang=en`;
 
       let result = await fetch(endpoint);
       let response = await result.json();

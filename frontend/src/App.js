@@ -1,5 +1,9 @@
 import React, { useContext } from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+// Components
+import Header from "./components/Header/index";
+// import Footer from './components/Footer/index';
 
 // Pages
 import Home from "./pages/Home/index";
@@ -9,26 +13,10 @@ import User from "./pages/User/index";
 
 // Context
 import GifsProvider from "./store/GifsProvider";
-import AuthProvider, { AuthContext } from "./store/AuthProvider";
+import AuthProvider from "./store/AuthProvider";
 
-import Header from "./components/Header/index";
-// import Footer from './components/Footer/index';
-
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { isAuth } = useContext(AuthContext);
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        isAuth ? (
-          <Component {...location} />
-        ) : (
-          <Redirect to={{ pathname: "/login", state: { from: location } }} />
-        )
-      }
-    />
-  );
-};
+// Routes
+import PrivateRoute from './store/routes'
 
 function App() {
   return (

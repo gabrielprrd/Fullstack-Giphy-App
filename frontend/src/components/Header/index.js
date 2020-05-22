@@ -9,10 +9,12 @@ export default function Header() {
   const history = useHistory();
 
   async function handleClick() {
+    // Logs out the user
     axios({
       method: 'post',
       url: 'http://localhost:5000/auth/logout',
     })
+    // Sends user to login page and reloads the page
     await history.push("/login");
     await window.location.reload();
   }

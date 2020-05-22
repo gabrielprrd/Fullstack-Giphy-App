@@ -4,22 +4,17 @@ I should find a more creative name. Maybe take the little ghost as the mascot.
 
 The project's idea is to recreate one of my first websites, but with updated syntax, way better practices and a backend in node.js to add more features.
 
-##Backend:
-    ## Next steps:
-        - Log out
 
 ##Frontend:
 To make the front end the most impressive possible, I'll take some ideas from the freefrontend website and maybe from the awwwards, but I'll make them only by myself so can improve my css skills.
 IMPORTANT: check if it's reasonable do it with styled-components
 https://freefrontend.com/javascript-input-text/
 
-- I'll only start the css part when I totally finish the funtionality part. Front and backend.
-
+- I'll only start the css part when I totally finish the functionality part. Front and backend.
 
 ---------------------------------------------------------------------------------------------------------
 Próximas funcionalidades
-- Criar página do usuário (private route)
-- Fazer página dar refresh quando dar login/logout
-- Oauth 2.0 pra autenticar via redes sociais
-- "Show more" button pra mostrar mais gifs
+- Mostrar mais gifs quando usuário atinge o fundo da página
+- Botão ScrollToTop? (talvez possa ser criativo tipo o fantasminha?)
+- Salvar gifs
 - Acrescentar loading enquanto as imagens não renderizam

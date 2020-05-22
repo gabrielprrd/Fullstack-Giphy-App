@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
+import React, { useRef, useContext, useEffect } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { Form } from "@unform/web";
 import * as Yup from "yup";
@@ -38,6 +38,7 @@ export default function Login(props) {
           data: data,
         });
 
+        // Sends user to home page and refresh it after login
         await history.push("/");
         await window.location.reload();
       };
@@ -63,14 +64,6 @@ export default function Login(props) {
       }
     }
   }
-
-  // I need to find a way to redirect the user when he logs in or re-render a component without the need to refresh
-  useEffect(() => {
-    const refresh = async () => {
-      // await window.page.reload(false);
-    };
-    refresh();
-  }, [isAuth]);
 
   // Only shows the form if user is logged out
   return (
