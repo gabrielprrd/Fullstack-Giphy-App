@@ -27,7 +27,7 @@ export default function Header() {
       <nav>
         <NavLink to="/">Home</NavLink>
         {isAuth ? <button onClick={handleClick}>Logout</button> : <NavLink to="/login">Log in</NavLink>}
-        <NavLink to="/signin">Sign in</NavLink>
+        {isAuth ? <span></span> : <NavLink to="/signin">Sign in</NavLink>}
         <NavLink to="/user">Saved gifs</NavLink>
       </nav>
     </header>

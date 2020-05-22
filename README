@@ -14,7 +14,9 @@ https://freefrontend.com/javascript-input-text/
 
 ---------------------------------------------------------------------------------------------------------
 Próximas funcionalidades
-- Mostrar mais gifs quando usuário atinge o fundo da página
-- Botão ScrollToTop? (talvez possa ser criativo tipo o fantasminha?)
 - Salvar gifs
-- Acrescentar loading enquanto as imagens não renderizam
+- Usuário loga automaticamente depois de se registrar
+- Botão ScrollToTop? (talvez possa ser criativo tipo o fantasminha?)
+- Lazy loading
+- Mostrar mais gifs quando usuário atinge o fundo da página
+- Checkar se ainda tá mandando o email

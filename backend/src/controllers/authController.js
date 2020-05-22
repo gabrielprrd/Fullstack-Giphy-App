@@ -17,7 +17,8 @@ const generateToken = (params = {}) => {
 
 let isAuthenticated = false;
 
-router.post('/register', async (req, res) => {
+router.route('/register')
+.post(async (req, res) => {
   try {
     // Verify if the user exists by the email because is a 'unique' field
     if (await User.findOne({ email: req.body.email })) {
@@ -32,16 +33,24 @@ router.post('/register', async (req, res) => {
       password: req.body.password,
     });
 
+    isAuthenticated = true;
     // The password is already hashed and sent to the request, but it shouldn't return even hashed
     user.password = undefined;
 
     return res.status(200).send({
       user,
       token: generateToken({ id: user.id }),
+      isAuthenticated,
     });
   } catch (err) {
     return res.status(400).send({ error: 'Registration failed' });
   }
+})
+// Logs the user automatically after register
+.get(async (req, res) => {
+  await res.send({
+    isAuthenticated
+  })
 });
 
 router
@@ -74,7 +83,7 @@ router.post('/logout', async (req, res) => {
   try {
     return res.status(200).send((isAuthenticated = false));
   } catch (err) {
-    res.status(400).send('Logout failed');
+    res.status(400).send(`Logout failed: ${err}`);
   }
 });
 

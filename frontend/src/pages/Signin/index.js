@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Form } from "@unform/web";
 import * as Yup from "yup";
 import axios from "axios";
@@ -36,15 +36,11 @@ export default function Signin() {
           data: data,
         });
       };
-      handleRegistration(data);
+      await handleRegistration(data);
 
       // Sends user to home page and refresh it after signin
       await history.push("/");
       await window.location.reload();
-
-      // If every input is valid, cleans the error messages and input fields
-      // formRef.current.setErrors({});
-      reset();
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errorMessages = {};
