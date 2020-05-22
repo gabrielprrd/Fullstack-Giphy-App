@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import {useHistory} from "react-router-dom";
 import { Form } from "@unform/web";
 import * as Yup from "yup";
 import axios from "axios";
@@ -7,6 +8,7 @@ import Input from "../../components/Form/Input";
 
 export default function Signin() {
   const formRef = useRef(null);
+  const history = useHistory();
 
   async function handleSubmit(data, { reset }) {
     try {
@@ -36,8 +38,12 @@ export default function Signin() {
       };
       handleRegistration(data);
 
+      // Sends user to home page and refresh it after signin
+      await history.push("/");
+      await window.location.reload();
+
       // If every input is valid, cleans the error messages and input fields
-      formRef.current.setErrors({});
+      // formRef.current.setErrors({});
       reset();
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
