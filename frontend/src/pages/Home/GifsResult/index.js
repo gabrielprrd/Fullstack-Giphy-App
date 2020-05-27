@@ -6,7 +6,7 @@ import { GifsContext } from "../../../store/GifsProvider";
 import { AuthContext } from "../../../store/AuthProvider";
 
 export default function GifsResult({ reqStatus, query, select }) {
-  const { gifs } = useContext(GifsContext);
+  const { gifs, setGifs } = useContext(GifsContext);
   const { isAuth, user } = useContext(AuthContext);
   const [fetchedIncrementer, setFetchedIncrementer] = useState(2);
 
@@ -28,12 +28,13 @@ export default function GifsResult({ reqStatus, query, select }) {
     try {
       incrementer++;
       setFetchedIncrementer(incrementer);
-      const handleAjaxRequest = () => {
-        axios({
+      const handleAjaxRequest = async () => {
+        let response = await axios({
           method: "post",
-          url: "http://localhost:5000/results",
+          url: "http://localhost:5000/results/",
           data: { query, select, fetchedIncrementer },
         });
+        setGifs([...response.data.data]);
       };
       handleAjaxRequest();
     } catch (err) {

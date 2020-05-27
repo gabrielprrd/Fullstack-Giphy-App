@@ -12,7 +12,6 @@ router.post('/results', async (req, res) => {
 
     let result = await fetch(endpoint);
     let response = await result.json();
-    // gifsObject = response;
     return res.send(response);
   } catch (err) {
     throw new Error(err);

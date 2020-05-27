@@ -46,20 +46,6 @@ export default function Home() {
     setSelect(imgType);
   }
 
-  // Retrieves the result fetched from the giphy's endpoint
-  // useEffect(() => {
-  //   const fetchFromServer = async () => {
-  //     try {
-  //       let response = await axios.get("http://localhost:5000/results/");
-  //       setGifs(response.data.data);
-  //       console.log("Response: ", response);
-  //     } catch (err) {
-  //       throw new Error(err);
-  //     }
-  //   };
-  //   fetchFromServer();
-  // }, [reqStatus]);
-
   return (
     <div className="container">
       <Form
