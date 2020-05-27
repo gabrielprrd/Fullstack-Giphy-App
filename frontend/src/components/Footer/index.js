@@ -1,8 +1,10 @@
 import React from "react";
 
+import { SFooter } from './styles'
+
 export default function Footer() {
   return (
-    <footer>
+    <SFooter>
       <p>
         Designed with love by{" "}
         <a href="https://github.com/gabrielprrd">Gabriel Afonso</a>
@@ -10,6 +12,6 @@ export default function Footer() {
       <a href="https://www.linkedin.com/in/gabriel-afonso-b1a473104/">
         Linkedin
       </a>
-    </footer>
+    </SFooter>
   );
 }

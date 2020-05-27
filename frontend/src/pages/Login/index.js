@@ -37,13 +37,12 @@ export default function Login(props) {
           url: "http://localhost:5000/auth/authenticate/",
           data: data,
         });
-
         // Sends user to home page and refresh it after login
         await history.push("/");
         await window.location.reload();
       };
       handleAuthentication(data);
-
+      
       // If every input is valid, cleans the error messages and input fields
       formRef.current.setErrors({});
       reset();

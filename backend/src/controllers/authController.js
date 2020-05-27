@@ -26,7 +26,6 @@ router.route('/register')
     }
 
     // Passes the user's info to the body of the request
-    // const user = await User.create(req.body);
     const user = await User.create({
       name: req.body.name,
       email: req.body.email,
@@ -47,11 +46,13 @@ router.route('/register')
   }
 })
 // Logs the user automatically after register
-.get(async (req, res) => {
-  await res.send({
+.get((req, res) => {
+  return res.send({
     isAuthenticated
   })
 });
+
+let userInfo = {};
 
 router
   .route('/authenticate')
@@ -70,12 +71,15 @@ router
     }
 
     user.password = undefined;
+    userInfo = user;
     isAuthenticated = true;
-    return res.status(200).send(isAuthenticated);
+
+    return res.status(200).send({isAuthenticated: isAuthenticated, user: user });
   })
-  .get(async (req, res) => {
-    await res.send({
+  .get((req, res) => {
+    return res.send({
       isAuthenticated,
+      userInfo
     });
   });
 
@@ -83,7 +87,7 @@ router.post('/logout', async (req, res) => {
   try {
     return res.status(200).send((isAuthenticated = false));
   } catch (err) {
-    res.status(400).send(`Logout failed: ${err}`);
+    return res.status(400).send(`Logout failed: ${err}`);
   }
 });
 

@@ -8,15 +8,16 @@ The project's idea is to recreate one of my first websites, but with updated syn
 ##Frontend:
 To make the front end the most impressive possible, I'll take some ideas from the freefrontend website and maybe from the awwwards, but I'll make them only by myself so can improve my css skills.
 IMPORTANT: check if it's reasonable do it with styled-components
+Always adopt the "component first" approach
 https://freefrontend.com/javascript-input-text/
 
 - I'll only start the css part when I totally finish the functionality part. Front and backend.
 
 ---------------------------------------------------------------------------------------------------------
 Próximas funcionalidades
+- Consertar bug do primeiro fetch nos gifs (o método get diz que o gifsObject é undefined no primeiro request)
 - Salvar gifs
-- Usuário loga automaticamente depois de se registrar
-- Botão ScrollToTop? (talvez possa ser criativo tipo o fantasminha?)
+- Botão ScrollToTop? (talvez possa ser criativo tipo o fantasminha ou aquele botão meio inclinado?)
 - Lazy loading
 - Mostrar mais gifs quando usuário atinge o fundo da página
 - Checkar se ainda tá mandando o email

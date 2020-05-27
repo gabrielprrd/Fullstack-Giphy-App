@@ -12,31 +12,30 @@ export default function Home() {
   const formRef = useRef(null);
   const { gifs, setGifs } = useContext(GifsContext);
   const [query, setQuery] = useState(""); // We need this query state to pass the query to the results component
-  const [reqStatus, setReqStatus] = useState({ isReqSent: false });
+  const [reqStatus, setReqStatus] = useState(false);
   const [select, setSelect] = useState("gifs");
 
   // Retrieves form data and calls the ajax request to send it to server
   async function handleSubmit(data, { reset }) {
     try {
-      setReqStatus({ isReqSent: true });
-
       Yup.object().shape({
         query: Yup.string().required("Please type something"),
       });
 
       // Sends the query data to backend so it can be used on the giphy's endpoint
-      const handleAjaxRequest = (data) => {
-        let query = data.query
-        setQuery(query); // This is needed to pass the query as props to another component
-        axios({
+      const handleAjaxRequest = async (data) => {
+        let query = data.query;
+        await setQuery(query); // This is needed to pass the query as props to another component
+        let response = await axios({
           method: "post",
           url: "http://localhost:5000/results/",
           data: { query, select },
         });
+        setGifs(response.data.data);
       };
-      handleAjaxRequest(data);
+      await handleAjaxRequest(data);
 
-      // Cleans the input fiels
+      await setReqStatus(true);
       reset();
     } catch (err) {
       console.log(err);
@@ -48,17 +47,18 @@ export default function Home() {
   }
 
   // Retrieves the result fetched from the giphy's endpoint
-  useEffect(() => {
-    const fetchFromServer = async () => {
-      try {
-        let response = await axios.get("http://localhost:5000/results/");
-        setGifs(response.data.data);
-      } catch (err) {
-        throw new Error(err);
-      }
-    };
-    fetchFromServer();
-  }, [gifs]);
+  // useEffect(() => {
+  //   const fetchFromServer = async () => {
+  //     try {
+  //       let response = await axios.get("http://localhost:5000/results/");
+  //       setGifs(response.data.data);
+  //       console.log("Response: ", response);
+  //     } catch (err) {
+  //       throw new Error(err);
+  //     }
+  //   };
+  //   fetchFromServer();
+  // }, [reqStatus]);
 
   return (
     <div className="container">
@@ -80,12 +80,8 @@ export default function Home() {
       </Form>
 
       {/* If the request was sent to the server, it renders the gifs */}
-      {reqStatus.isReqSent && (
-        <GifsResult
-          isReqSent={reqStatus.isReqSent}
-          query={query}
-          select={select}
-        />
+      {reqStatus && (
+        <GifsResult reqStatus={reqStatus} query={query} select={select} />
       )}
     </div>
   );

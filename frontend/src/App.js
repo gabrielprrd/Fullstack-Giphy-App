@@ -3,7 +3,10 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // Components
 import Header from "./components/Header/index";
-// import Footer from './components/Footer/index';
+import Footer from "./components/Footer/index";
+
+// Styles
+import { GlobalStyle, AppContainer } from "./appStyles";
 
 // Context
 import GifsProvider from "./store/GifsProvider";
@@ -24,14 +27,15 @@ function App() {
       <AuthProvider>
         <Router>
           <Suspense fallback={<div>Loading...</div>}>
-            <div className="App">
+          <GlobalStyle />
+            <AppContainer>
               <Header />
               <Route path="/" exact component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/signin" component={Signin} />
               <PrivateRoute path="/user" component={User} />
-              {/* <Footer /> */}
-            </div>
+              <Footer />
+            </AppContainer>
           </Suspense>
         </Router>
       </AuthProvider>

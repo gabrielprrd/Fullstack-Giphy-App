@@ -10,7 +10,7 @@ export default function Signin() {
   const formRef = useRef(null);
   const history = useHistory();
 
-  async function handleSubmit(data, { reset }) {
+  async function handleSubmit(data) {
     try {
       // Form validation
       const schema = Yup.object().shape({

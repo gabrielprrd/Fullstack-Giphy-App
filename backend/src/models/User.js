@@ -20,6 +20,9 @@ const UserSchema = new mongoose.Schema({
     required: true,
     select: false, //so the password is not shown when the user is returned
   },
+  gifs: {
+    type: Array,
+  },
   createdAt: {
     type: Date,
     default: Date.now(),

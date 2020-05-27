@@ -6,6 +6,7 @@ mongoose
   .connect(dbPath, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
     useCreateIndex: true, // to stop a deprecation warning
   })
   .then(() => console.log('Mongoose connected'))

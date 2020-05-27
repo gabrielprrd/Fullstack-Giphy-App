@@ -5,30 +5,28 @@ import axios from "axios";
 import { GifsContext } from "../../../store/GifsProvider";
 import { AuthContext } from "../../../store/AuthProvider";
 
-export default function GifsResult({ isReqSent, query, select }) {
+export default function GifsResult({ reqStatus, query, select }) {
   const { gifs } = useContext(GifsContext);
-  const { isAuth } = useContext(AuthContext);
-  const [savedGif, setSavedGif] = useState([]);
+  const { isAuth, user } = useContext(AuthContext);
   const [fetchedIncrementer, setFetchedIncrementer] = useState(2);
 
   function handleClick(item) {
-    setSavedGif(item);
+    const handleAjaxRequest = () => {
+      axios({
+        method: "post",
+        url: `http://localhost:5000/savegif/${user._id}`,
+        data: item,
+      });
+    };
+    handleAjaxRequest();
+    console.log(item);
   }
 
-  // async function handleSubmit(savedGif) {
-  //   handleAjaxRequest()
-  //   axios({
-  //     method: 'post',
-  //     url: '',
-  //     data: savedGif
-  //   })
-  // }
-
-  let incrementer = fetchedIncrementer
+  let incrementer = fetchedIncrementer;
 
   function showMoreGifs() {
     try {
-      incrementer++
+      incrementer++;
       setFetchedIncrementer(incrementer);
       const handleAjaxRequest = () => {
         axios({
@@ -43,10 +41,6 @@ export default function GifsResult({ isReqSent, query, select }) {
     }
   }
 
-  // useEffect(() => {
-  //   console.log(savedGif);
-  // }, [savedGif]);
-
   return (
     <div>
       {gifs.map((item) => {
@@ -58,7 +52,7 @@ export default function GifsResult({ isReqSent, query, select }) {
         );
       })}
 
-      {isReqSent && <button onClick={showMoreGifs}>Show more</button>}
+      {reqStatus && <button onClick={showMoreGifs}>Show more</button>}
     </div>
   );
 }
