@@ -1,22 +1,40 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 
 // Context
 import { GifsContext } from "../../../store/GifsProvider";
 import { AuthContext } from "../../../store/AuthProvider";
 
+// Styles
+import { SButton } from "../../../appStyles";
+import {
+  SGifsFlexContainer,
+  SGifsListContainer,
+  SGifContainer,
+} from "./styles";
+
 export default function GifsResult({ reqStatus, query, select }) {
   const { gifs, setGifs } = useContext(GifsContext);
   const { isAuth, user } = useContext(AuthContext);
   const [fetchedIncrementer, setFetchedIncrementer] = useState(2);
 
-  function handleClick(item) {
+  function saveGif(item) {
+    let isGifRepeated = false;
     const handleAjaxRequest = () => {
-      axios({
-        method: "post",
-        url: `http://localhost:5000/savegif/${user._id}`,
-        data: item,
+      user.gifs.map((gif) => {
+        if (item.id === gif.id) {
+          console.log("Gif already saved");
+          isGifRepeated = true;
+        }
       });
+
+      if (isGifRepeated === false) {
+        axios({
+          method: "post",
+          url: `http://localhost:5000/savegif/${user._id}`,
+          data: item,
+        });
+      }
     };
     handleAjaxRequest();
     console.log(item);
@@ -43,17 +61,18 @@ export default function GifsResult({ reqStatus, query, select }) {
   }
 
   return (
-    <div>
-      {gifs.map((item) => {
-        return (
-          <div className="gif-container" key={item.id}>
-            <img src={item.images.fixed_height.url} alt={item.title} />
-            {isAuth && <button onClick={(e) => handleClick(item)}>Save</button>}
-          </div>
-        );
-      })}
-
-      {reqStatus && <button onClick={showMoreGifs}>Show more</button>}
-    </div>
+    <SGifsFlexContainer>
+      <SGifsListContainer>
+        {gifs.map((item) => {
+          return (
+            <SGifContainer key={item.id}>
+              <img src={item.images.fixed_height.url} alt={item.title} />
+              {isAuth && <SButton onClick={() => saveGif(item)}>Save</SButton>}
+            </SGifContainer>
+          );
+        })}
+      </SGifsListContainer>
+      {reqStatus && <SButton onClick={showMoreGifs}>Show more</SButton>}
+    </SGifsFlexContainer>
   );
 }

@@ -11,13 +11,14 @@ IMPORTANT: check if it's reasonable do it with styled-components
 Always adopt the "component first" approach
 https://freefrontend.com/javascript-input-text/
 
-- I'll only start the css part when I totally finish the functionality part. Front and backend.
 
 ---------------------------------------------------------------------------------------------------------
 Próximas funcionalidades
-- Consertar bug do primeiro fetch nos gifs (o método get diz que o gifsObject é undefined no primeiro request)
-- Salvar gifs
+- Salvar gifs (apresenta erro se o usuário acabou de ser registrado. dá bad request e não salva)
+- Salvar gifs (só atualiza os usuários salvos quando reloga)
+- Quando um usuário novo se cadastra, o site fica logado no último perfil
 - Botão ScrollToTop? (talvez possa ser criativo tipo o fantasminha ou aquele botão meio inclinado?)
 - Lazy loading
 - Mostrar mais gifs quando usuário atinge o fundo da página
 - Checkar se ainda tá mandando o email
+- React transitions para as páginas

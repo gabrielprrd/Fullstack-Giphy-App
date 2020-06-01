@@ -3,7 +3,16 @@ import { NavLink, useHistory } from "react-router-dom";
 import { AuthContext } from "../../store/AuthProvider";
 import axios from "axios";
 
-import { SHeader, SNav } from "./styles";
+import {
+  SHeader,
+  SNav,
+  SLogoContainer,
+  SBurgerMenu,
+  SBar,
+  SBar2,
+  SBar3,
+} from "./styles";
+import GhostLogo from "../../assets/images/ghost-logo.svg";
 
 export default function Header() {
   const { isAuth } = useContext(AuthContext);
@@ -20,21 +29,31 @@ export default function Header() {
     await window.location.reload();
   }
 
+  function showNav() {
+    
+  }
+
   return (
     <SHeader>
-      <div id="logo-container">
+      <SLogoContainer>
+        <img src={GhostLogo} alt="Ghost Logo" />
         <p>Gabriskas Gif Searcher</p>
-      </div>
+      </SLogoContainer>
       <SNav>
         <NavLink to="/">Home</NavLink>
         {isAuth ? (
-          <button onClick={handleClick}>Logout</button>
+          <a onClick={handleClick}>Logout</a>
         ) : (
           <NavLink to="/login">Log in</NavLink>
         )}
         {isAuth ? <span></span> : <NavLink to="/signin">Sign in</NavLink>}
         <NavLink to="/user">Saved gifs</NavLink>
       </SNav>
+      <SBurgerMenu onClick={showNav}>
+        <SBar />
+        <SBar2 />
+        <SBar3 />
+      </SBurgerMenu>
     </SHeader>
   );
 }

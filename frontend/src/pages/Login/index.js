@@ -4,8 +4,14 @@ import { Form } from "@unform/web";
 import * as Yup from "yup";
 import axios from "axios";
 
+// Context
 import { AuthContext } from "../../store/AuthProvider";
+
+// Components
 import Input from "../../components/Form/Input";
+
+// Styles
+import { SContainer, SButton, SLabel } from "../../appStyles";
 
 export default function Login(props) {
   const { from } = props.location.state || { from: { pathname: "/" } };
@@ -42,7 +48,7 @@ export default function Login(props) {
         await window.location.reload();
       };
       handleAuthentication(data);
-      
+
       // If every input is valid, cleans the error messages and input fields
       formRef.current.setErrors({});
       reset();
@@ -66,17 +72,19 @@ export default function Login(props) {
 
   // Only shows the form if user is logged out
   return (
-    <div className="page-container">
+    <SContainer>
       {isAuth ? (
         <h1>Welcome! You're already logged in</h1>
       ) : (
         <Form ref={formRef} onSubmit={handleSubmit}>
+          <SLabel htmlFor="email">Email:</SLabel>
           <Input type="email" name="email" />
+          <SLabel htmlFor="password">Password:</SLabel>
           <Input type="password" name="password" />
 
-          <button type="submit">Log in</button>
+          <SButton type="submit">Log in</SButton>
         </Form>
       )}
-    </div>
+    </SContainer>
   );
 }

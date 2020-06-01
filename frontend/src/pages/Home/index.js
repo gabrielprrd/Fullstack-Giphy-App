@@ -1,19 +1,24 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { Form } from "@unform/web";
 import axios from "axios";
 import * as Yup from "yup";
 
-//components
+// Components
 import { GifsContext } from "../../store/GifsProvider";
 import GifsResult from "./GifsResult/index";
 import Input from "../../components/Form/Input";
 
+// Styles
+import { SContainer, SButton } from "../../appStyles";
+import { SGhostForm, SGhostBody } from "./styles";
+
 export default function Home() {
   const formRef = useRef(null);
-  const { gifs, setGifs } = useContext(GifsContext);
+  const { setGifs } = useContext(GifsContext);
   const [query, setQuery] = useState(""); // We need this query state to pass the query to the results component
   const [reqStatus, setReqStatus] = useState(false);
   const [select, setSelect] = useState("gifs");
+  const [isFocused, setFocus] = useState(false);
 
   // Retrieves form data and calls the ajax request to send it to server
   async function handleSubmit(data, { reset }) {
@@ -46,29 +51,48 @@ export default function Home() {
     setSelect(imgType);
   }
 
+  function toggleFocus() {
+    setFocus(true);
+  }
+
   return (
-    <div className="container">
-      <Form
-        ref={formRef}
-        onSubmit={handleSubmit}
-        method="POST"
-        action="/results"
-      >
-        <Input name="query" required />
-        <select
-          name="imgType"
-          onChange={(e) => handleSelectChange(e.target.value)}
+    <SContainer>
+      <SGhostForm>
+        <SGhostBody>
+          <div className="face">
+            <div className="mouth" />
+          </div>
+        </SGhostBody>
+
+        <Form
+          ref={formRef}
+          onSubmit={handleSubmit}
+          method="POST"
+          action="/results"
         >
-          <option value="gifs">Gifs</option>
-          <option value="stickers">Stickers</option>
-        </select>
-        <button type="submit">Search Gifs</button>
-      </Form>
+          <Input
+            name="query"
+            required
+            placeholder="Type anything"
+            onFocus={toggleFocus}
+            isfocused={isFocused ? 1 : 0}
+          />
+          <select
+            name="imgType"
+            onChange={(e) => handleSelectChange(e.target.value)}
+          >
+            <option value="gifs">Gifs</option>
+            <option value="stickers">Stickers</option>
+          </select>
+
+          <SButton type="submit">Search Gifs</SButton>
+        </Form>
+      </SGhostForm>
 
       {/* If the request was sent to the server, it renders the gifs */}
       {reqStatus && (
         <GifsResult reqStatus={reqStatus} query={query} select={select} />
       )}
-    </div>
+    </SContainer>
   );
 }

@@ -25,10 +25,10 @@ export default function AuthProvider({ children }) {
     };
 
     fetchFromServer();
-  }, [isAuth]);
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ user, isAuth, setAuth }}>
+    <AuthContext.Provider value={{ user, setUser, isAuth, setAuth }}>
       {children}
     </AuthContext.Provider>
   );
