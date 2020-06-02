@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
-import { device } from "./assets/globalStyles/device";
+import { Form } from "@unform/web";
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -11,6 +11,8 @@ export const GlobalStyle = createGlobalStyle`
     --primary-color: #553c8b;
     --secondary-color: #303960;
     --tertiary-color: #ffffff;
+
+    --ghost-transition-time: 0.3s;
   }
 
   html, body {
@@ -18,6 +20,14 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     font-family: 'Roboto', sans-serif;
   }
+
+  input {
+    border-radius: 3px;
+    padding: 10px;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+  }
+
 `;
 
 export const AppContainer = styled.div`
@@ -27,10 +37,10 @@ export const AppContainer = styled.div`
   flex-direction: column;
   align-items: stretch;
   color: var(--tertiary-color);
+  background: var(--primary-color);
 `;
 
 export const SContainer = styled.div`
-  background: var(--primary-color);
   flex-grow: 1;
   height: 100%;
   display: flex;
@@ -41,12 +51,12 @@ export const SContainer = styled.div`
 
 export const SButton = styled.button`
   text-decoration: none;
-  border: 4px solid white;
+  border: 4px solid var(--tertiary-color);
   border-radius: 5px;
   font-size: 1em;
   padding: 0.5em 3em;
   transition: all 0.2s;
-  background: var(--primary-color);
+  background: var(--secondary-color);
   color: var(--tertiary-color);
   cursor: pointer;
 
@@ -64,3 +74,8 @@ export const SButton = styled.button`
 export const SLabel = styled.label`
   font-size: 1.5em;
 `;
+
+export const SForm = styled(Form)`
+  display: flex;
+  flex-direction: column;
+`

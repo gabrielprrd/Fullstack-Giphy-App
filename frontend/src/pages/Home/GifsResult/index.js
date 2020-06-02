@@ -11,6 +11,7 @@ import {
   SGifsFlexContainer,
   SGifsListContainer,
   SGifContainer,
+  SSaveButton,
 } from "./styles";
 
 export default function GifsResult({ reqStatus, query, select }) {
@@ -65,9 +66,11 @@ export default function GifsResult({ reqStatus, query, select }) {
       <SGifsListContainer>
         {gifs.map((item) => {
           return (
-            <SGifContainer key={item.id}>
+            <SGifContainer key={item.id} onHover>
               <img src={item.images.fixed_height.url} alt={item.title} />
-              {isAuth && <SButton onClick={() => saveGif(item)}>Save</SButton>}
+              {isAuth && (
+                <SSaveButton onClick={() => saveGif(item)}>Save</SSaveButton>
+              )}
             </SGifContainer>
           );
         })}

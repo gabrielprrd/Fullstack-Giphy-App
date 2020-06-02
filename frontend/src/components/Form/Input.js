@@ -13,9 +13,9 @@ export default function Input({ name, ...rest }) {
     });
   }, [fieldName, registerField]);
   return (
-    <div>
-      <input ref={inputRef} {...rest} />
+    <>
+      <input {...rest} ref={inputRef} />
       {error && <span>{error}</span>}
-    </div>
+    </>
   );
 }

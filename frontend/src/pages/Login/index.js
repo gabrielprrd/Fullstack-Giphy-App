@@ -1,6 +1,5 @@
 import React, { useRef, useContext, useEffect } from "react";
 import { Redirect, useHistory } from "react-router-dom";
-import { Form } from "@unform/web";
 import * as Yup from "yup";
 import axios from "axios";
 
@@ -11,7 +10,7 @@ import { AuthContext } from "../../store/AuthProvider";
 import Input from "../../components/Form/Input";
 
 // Styles
-import { SContainer, SButton, SLabel } from "../../appStyles";
+import { SContainer, SButton, SLabel, SForm } from "../../appStyles";
 
 export default function Login(props) {
   const { from } = props.location.state || { from: { pathname: "/" } };
@@ -76,14 +75,15 @@ export default function Login(props) {
       {isAuth ? (
         <h1>Welcome! You're already logged in</h1>
       ) : (
-        <Form ref={formRef} onSubmit={handleSubmit}>
+        <SForm ref={formRef} onSubmit={handleSubmit}>
           <SLabel htmlFor="email">Email:</SLabel>
           <Input type="email" name="email" />
+
           <SLabel htmlFor="password">Password:</SLabel>
           <Input type="password" name="password" />
 
           <SButton type="submit">Log in</SButton>
-        </Form>
+        </SForm>
       )}
     </SContainer>
   );

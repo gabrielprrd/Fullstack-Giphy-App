@@ -6,11 +6,10 @@ import * as Yup from "yup";
 // Components
 import { GifsContext } from "../../store/GifsProvider";
 import GifsResult from "./GifsResult/index";
-import Input from "../../components/Form/Input";
 
 // Styles
 import { SContainer, SButton } from "../../appStyles";
-import { SGhostForm, SGhostBody } from "./styles";
+import { SGhostForm, SGhostBody, SForm, SInput, SSelect, SGhostButton } from "./styles";
 
 export default function Home() {
   const formRef = useRef(null);
@@ -52,41 +51,43 @@ export default function Home() {
   }
 
   function toggleFocus() {
-    setFocus(true);
+    setFocus(!isFocused);
   }
 
   return (
     <SContainer>
-      <SGhostForm>
-        <SGhostBody>
-          <div className="face">
-            <div className="mouth" />
+      <SGhostForm onFocus={toggleFocus} onBlur={toggleFocus}>
+        <SGhostBody isfocused={isFocused}>
+          <div className="face" isfocused={isFocused}>
+            <div className="mouth" isfocused={isFocused} />
           </div>
         </SGhostBody>
 
-        <Form
+        <SForm
           ref={formRef}
           onSubmit={handleSubmit}
           method="POST"
           action="/results"
         >
-          <Input
+          <SInput
             name="query"
             required
             placeholder="Type anything"
-            onFocus={toggleFocus}
-            isfocused={isFocused ? 1 : 0}
+            isfocused={isFocused}
           />
-          <select
+          <SSelect
             name="imgType"
+            isfocused={isFocused}
             onChange={(e) => handleSelectChange(e.target.value)}
           >
             <option value="gifs">Gifs</option>
             <option value="stickers">Stickers</option>
-          </select>
+          </SSelect>
 
-          <SButton type="submit">Search Gifs</SButton>
-        </Form>
+          <SGhostButton type="submit" isfocused={isFocused}>
+            Search Gifs
+          </SGhostButton>
+        </SForm>
       </SGhostForm>
 
       {/* If the request was sent to the server, it renders the gifs */}

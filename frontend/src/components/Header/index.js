@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { AuthContext } from "../../store/AuthProvider";
 import axios from "axios";
@@ -17,6 +17,7 @@ import GhostLogo from "../../assets/images/ghost-logo.svg";
 export default function Header() {
   const { isAuth } = useContext(AuthContext);
   const history = useHistory();
+  const [isMenuClicked, setClick] = useState(false);
 
   async function handleClick() {
     // Logs out the user
@@ -29,8 +30,12 @@ export default function Header() {
     await window.location.reload();
   }
 
-  function showNav() {
-    
+  function toggleNav() {
+    setClick(!isMenuClicked);
+  }
+
+  function hideNav() {
+    setClick(false);
   }
 
   return (
@@ -39,20 +44,39 @@ export default function Header() {
         <img src={GhostLogo} alt="Ghost Logo" />
         <p>Gabriskas Gif Searcher</p>
       </SLogoContainer>
-      <SNav>
-        <NavLink to="/">Home</NavLink>
+      <SNav isMenuClicked={isMenuClicked}>
+        <NavLink to="/" onClick={hideNav}>
+          Home
+        </NavLink>
         {isAuth ? (
-          <a onClick={handleClick}>Logout</a>
+          <a
+            onClick={() => {
+              handleClick();
+              hideNav();
+            }}
+          >
+            Logout
+          </a>
         ) : (
-          <NavLink to="/login">Log in</NavLink>
+          <NavLink to="/login" onClick={hideNav}>
+            Log in
+          </NavLink>
         )}
-        {isAuth ? <span></span> : <NavLink to="/signin">Sign in</NavLink>}
-        <NavLink to="/user">Saved gifs</NavLink>
+        {isAuth ? (
+          <span></span>
+        ) : (
+          <NavLink to="/signin" onClick={hideNav}>
+            Sign in
+          </NavLink>
+        )}
+        <NavLink to="/user" onClick={hideNav}>
+          Saved gifs
+        </NavLink>
       </SNav>
-      <SBurgerMenu onClick={showNav}>
-        <SBar />
-        <SBar2 />
-        <SBar3 />
+      <SBurgerMenu onClick={toggleNav}>
+        <SBar isMenuClicked={isMenuClicked} />
+        <SBar2 isMenuClicked={isMenuClicked} />
+        <SBar3 isMenuClicked={isMenuClicked} />
       </SBurgerMenu>
     </SHeader>
   );

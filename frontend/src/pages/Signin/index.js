@@ -7,7 +7,7 @@ import axios from "axios";
 import Input from "../../components/Form/Input";
 
 // Styles
-import { SContainer, SButton, SLabel } from "../../appStyles";
+import { SContainer, SButton, SLabel, SForm } from "../../appStyles";
 
 export default function Signin() {
   const formRef = useRef(null);
@@ -58,7 +58,7 @@ export default function Signin() {
   }
   return (
     <SContainer>
-      <Form ref={formRef} onSubmit={handleSubmit}>
+      <SForm ref={formRef} onSubmit={handleSubmit}>
         <SLabel htmlFor="name">Name:</SLabel>
         <Input name="name" />
         <SLabel htmlFor="email">Email:</SLabel>
@@ -67,7 +67,7 @@ export default function Signin() {
         <Input type="password" name="password" />
 
         <SButton type="submit">Sign in</SButton>
-      </Form>
+      </SForm>
     </SContainer>
   );
 }

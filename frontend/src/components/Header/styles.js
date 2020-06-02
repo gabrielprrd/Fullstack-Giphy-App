@@ -30,13 +30,33 @@ export const SNav = styled.nav`
     margin-right: 10px;
     cursor: pointer;
   }
+
+  @media ${device.tablet} {
+    line-height: normal;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    background: var(--primary-color);
+    transition: 0.4s;
+    right: ${(props) => (props.isMenuClicked ? "0" : "100%")};
+
+    a {
+      padding: 30px;
+      font-size: 2em;
+    }
+  }
 `;
 
 export const SBurgerMenu = styled.div`
   display: none;
+  z-index: 99;
   cursor: pointer;
 
-  @media only screen and (max-width(${device.mobileL})) {
+  @media ${device.tablet} {
     display: inline-block;
   }
 `;
@@ -47,20 +67,16 @@ export const SBar = styled.div`
   background-color: var(--tertiary-color);
   margin: 6px 0;
   transition: 0.4s;
+  transform: ${(props) =>
+    props.isMenuClicked ? "rotate(-45deg) translate(-9px, 6px)" : "none"};
 `;
 
-export const SBar2 = styled(SBar)``;
+export const SBar2 = styled(SBar)`
+  transform: none;
+  opacity: ${(props) => (props.isMenuClicked ? 0 : 1)};
+`;
 
-export const SBar3 = styled(SBar)``;
-
-// .change .bar1 {
-//   -webkit-transform: rotate(-45deg) translate(-9px, 6px);
-//   transform: rotate(-45deg) translate(-9px, 6px);
-// }
-
-// .change .bar2 {opacity: 0;}
-
-// .change .bar3 {
-//   -webkit-transform: rotate(45deg) translate(-8px, -8px);
-//   transform: rotate(45deg) translate(-8px, -8px);
-// }
+export const SBar3 = styled(SBar)`
+  transform: ${(props) =>
+    props.isMenuClicked ? "rotate(45deg) translate(-8px, -8px)" : "none"};
+`;
