@@ -25,7 +25,6 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 3px;
     padding: 10px;
     font-size: 1.1em;
-    margin-bottom: 20px;
   }
 
 `;
@@ -48,6 +47,13 @@ export const SContainer = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const SInnerFormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+`
 
 export const SButton = styled.button`
   text-decoration: none;

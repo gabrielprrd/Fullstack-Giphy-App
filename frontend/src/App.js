@@ -6,7 +6,7 @@ import Header from "./components/Header/index";
 import Footer from "./components/Footer/index";
 
 // Styles
-import { GlobalStyle, AppContainer } from "./appStyles";
+import { GlobalStyle, AppContainer } from "./assets/globalStyles/appStyles";
 
 // Context
 import GifsProvider from "./store/GifsProvider";
@@ -14,6 +14,9 @@ import AuthProvider from "./store/AuthProvider";
 
 // Routes
 import PrivateRoute from "./store/routes";
+
+// Components
+import Loading from "./components/Loading/index"; // lazy loading
 
 // Pages
 const Home = lazy(() => import("./pages/Home/index"));
@@ -26,17 +29,17 @@ function App() {
     <GifsProvider>
       <AuthProvider>
         <Router>
-          <Suspense fallback={<div>Loading...</div>}>
           <GlobalStyle />
-            <AppContainer>
+          <AppContainer>
+            <Suspense fallback={<Loading />}>
               <Header />
               <Route path="/" exact component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/signin" component={Signin} />
               <PrivateRoute path="/user" component={User} />
               <Footer />
-            </AppContainer>
-          </Suspense>
+            </Suspense>
+          </AppContainer>
         </Router>
       </AuthProvider>
     </GifsProvider>

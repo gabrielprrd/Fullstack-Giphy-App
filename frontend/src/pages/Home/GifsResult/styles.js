@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { device } from "../../../assets/globalStyles/device";
-import { SButton } from "../../../appStyles";
+import { SButton } from "../../../assets/globalStyles/appStyles";
 
 export const SGifsFlexContainer = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ export const SGifsListContainer = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   justify-content: center;
   align-content: center;
-  margin-bottom: 40px;
+  margin: 40px 0px;
 
   @media ${device.tablet} {
     grid-template-columns: 1fr;
@@ -51,6 +51,14 @@ export const SGifContainer = styled.div`
       opacity: 0.6;
     }
   }
+`;
+
+export const SNoResultsFound = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+  font-size: 1.5em;
 `;
 
 export const SSaveButton = styled(SButton)`

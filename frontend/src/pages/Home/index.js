@@ -8,7 +8,7 @@ import { GifsContext } from "../../store/GifsProvider";
 import GifsResult from "./GifsResult/index";
 
 // Styles
-import { SContainer, SButton } from "../../appStyles";
+import { SContainer, SButton } from "../../assets/globalStyles/appStyles";
 import { SGhostForm, SGhostBody, SForm, SInput, SSelect, SGhostButton } from "./styles";
 
 export default function Home() {

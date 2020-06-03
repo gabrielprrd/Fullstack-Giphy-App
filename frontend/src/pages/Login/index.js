@@ -10,7 +10,13 @@ import { AuthContext } from "../../store/AuthProvider";
 import Input from "../../components/Form/Input";
 
 // Styles
-import { SContainer, SButton, SLabel, SForm } from "../../appStyles";
+import {
+  SContainer,
+  SButton,
+  SLabel,
+  SForm,
+  SInnerFormContainer,
+} from "../../assets/globalStyles/appStyles";
 
 export default function Login(props) {
   const { from } = props.location.state || { from: { pathname: "/" } };
@@ -76,12 +82,14 @@ export default function Login(props) {
         <h1>Welcome! You're already logged in</h1>
       ) : (
         <SForm ref={formRef} onSubmit={handleSubmit}>
-          <SLabel htmlFor="email">Email:</SLabel>
-          <Input type="email" name="email" />
-
-          <SLabel htmlFor="password">Password:</SLabel>
-          <Input type="password" name="password" />
-
+          <SInnerFormContainer>
+            <SLabel htmlFor="email">Email:</SLabel>
+            <Input type="email" name="email" />
+          </SInnerFormContainer>
+          <SInnerFormContainer>
+            <SLabel htmlFor="password">Password:</SLabel>
+            <Input type="password" name="password" />
+          </SInnerFormContainer>
           <SButton type="submit">Log in</SButton>
         </SForm>
       )}

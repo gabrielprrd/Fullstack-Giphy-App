@@ -6,18 +6,44 @@ import { GifsContext } from "../../../store/GifsProvider";
 import { AuthContext } from "../../../store/AuthProvider";
 
 // Styles
-import { SButton } from "../../../appStyles";
+import { SButton } from "../../../assets/globalStyles/appStyles";
 import {
   SGifsFlexContainer,
   SGifsListContainer,
   SGifContainer,
   SSaveButton,
+  SNoResultsFound,
 } from "./styles";
 
 export default function GifsResult({ reqStatus, query, select }) {
   const { gifs, setGifs } = useContext(GifsContext);
   const { isAuth, user } = useContext(AuthContext);
   const [fetchedIncrementer, setFetchedIncrementer] = useState(2);
+
+  function showGifs() {
+    if (gifs.length > 0) {
+      return (
+        <SGifsListContainer>
+          {gifs.map((item) => {
+            return (
+              <SGifContainer key={item.id}>
+                <img src={item.images.fixed_height.url} alt={item.title} />
+                {isAuth && (
+                  <SSaveButton onClick={() => saveGif(item)}>Save</SSaveButton>
+                )}
+              </SGifContainer>
+            );
+          })}
+        </SGifsListContainer>
+      );
+    } else {
+      return (
+        <SNoResultsFound>
+          <p>0 results founds. Try another keyword :)</p>
+        </SNoResultsFound>
+      );
+    }
+  }
 
   function saveGif(item) {
     let isGifRepeated = false;
@@ -39,6 +65,12 @@ export default function GifsResult({ reqStatus, query, select }) {
     };
     handleAjaxRequest();
     console.log(item);
+  }
+
+  function showShowMoreGifsButton() {
+    if (gifs.length > 0 && reqStatus) {
+      return <SButton onClick={showMoreGifs}>Show more</SButton>;
+    }
   }
 
   let incrementer = fetchedIncrementer;
@@ -63,19 +95,8 @@ export default function GifsResult({ reqStatus, query, select }) {
 
   return (
     <SGifsFlexContainer>
-      <SGifsListContainer>
-        {gifs.map((item) => {
-          return (
-            <SGifContainer key={item.id} onHover>
-              <img src={item.images.fixed_height.url} alt={item.title} />
-              {isAuth && (
-                <SSaveButton onClick={() => saveGif(item)}>Save</SSaveButton>
-              )}
-            </SGifContainer>
-          );
-        })}
-      </SGifsListContainer>
-      {reqStatus && <SButton onClick={showMoreGifs}>Show more</SButton>}
+      {showGifs()}
+      {showShowMoreGifsButton()}
     </SGifsFlexContainer>
   );
 }

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Input from "../../components/Form/Input";
 import { Form } from "@unform/web";
-import { SButton } from "../../appStyles";
+import { SButton } from "../../assets/globalStyles/appStyles";
 import { device } from "../../assets/globalStyles/device";
 
 export const SGhostForm = styled.div`

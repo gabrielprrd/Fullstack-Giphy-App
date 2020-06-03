@@ -4,10 +4,17 @@ import { Form } from "@unform/web";
 import * as Yup from "yup";
 import axios from "axios";
 
+// Components
 import Input from "../../components/Form/Input";
 
 // Styles
-import { SContainer, SButton, SLabel, SForm } from "../../appStyles";
+import {
+  SContainer,
+  SButton,
+  SLabel,
+  SForm,
+  SInnerFormContainer,
+} from "../../assets/globalStyles/appStyles";
 
 export default function Signin() {
   const formRef = useRef(null);
@@ -59,12 +66,20 @@ export default function Signin() {
   return (
     <SContainer>
       <SForm ref={formRef} onSubmit={handleSubmit}>
-        <SLabel htmlFor="name">Name:</SLabel>
-        <Input name="name" />
-        <SLabel htmlFor="email">Email:</SLabel>
-        <Input type="email" name="email" />
-        <SLabel htmlFor="password">Password:</SLabel>
-        <Input type="password" name="password" />
+        <SInnerFormContainer>
+          <SLabel htmlFor="name">Name:</SLabel>
+          <Input name="name" />
+        </SInnerFormContainer>
+
+        <SInnerFormContainer>
+          <SLabel htmlFor="email">Email:</SLabel>
+          <Input type="email" name="email" />
+        </SInnerFormContainer>
+
+        <SInnerFormContainer>
+          <SLabel htmlFor="password">Password:</SLabel>
+          <Input type="password" name="password" />
+        </SInnerFormContainer>
 
         <SButton type="submit">Sign in</SButton>
       </SForm>
