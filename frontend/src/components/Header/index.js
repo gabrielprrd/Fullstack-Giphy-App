@@ -42,7 +42,7 @@ export default function Header() {
     <SHeader>
       <SLogoContainer>
         <img src={GhostLogo} alt="Ghost Logo" />
-        <p>Gabriskas Gif Searcher</p>
+        <NavLink to="/">Gabriska's Gif Searcher</NavLink>
       </SLogoContainer>
       <SNav isMenuClicked={isMenuClicked}>
         <NavLink to="/" onClick={hideNav}>

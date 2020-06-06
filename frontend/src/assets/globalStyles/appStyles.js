@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components";
 import { Form } from "@unform/web";
+import { device } from "./device";
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -26,7 +27,6 @@ export const GlobalStyle = createGlobalStyle`
     padding: 10px;
     font-size: 1.1em;
   }
-
 `;
 
 export const AppContainer = styled.div`
@@ -48,12 +48,30 @@ export const SContainer = styled.div`
   justify-content: center;
 `;
 
+export const SGifsFlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+`;
+
+export const SGifsListContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  align-content: center;
+  margin: 40px 0px;
+
+  @media ${device.tablet} {
+    grid-template-columns: 1fr;
+    margin-top: 60px;
+  }
+`;
+
 export const SInnerFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
-
-`
+`;
 
 export const SButton = styled.button`
   text-decoration: none;
@@ -84,4 +102,12 @@ export const SLabel = styled.label`
 export const SForm = styled(Form)`
   display: flex;
   flex-direction: column;
-`
+`;
+
+export const SLoginSigninSuggestion = styled.p`
+  margin-top: 20px;
+  
+  a {
+    color: var(--tertiary-color);
+  }
+`;

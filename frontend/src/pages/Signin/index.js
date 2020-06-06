@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
-import { useHistory } from "react-router-dom";
-import { Form } from "@unform/web";
+import { NavLink, useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import axios from "axios";
 
@@ -14,6 +13,7 @@ import {
   SLabel,
   SForm,
   SInnerFormContainer,
+  SLoginSigninSuggestion
 } from "../../assets/globalStyles/appStyles";
 
 export default function Signin() {
@@ -83,6 +83,10 @@ export default function Signin() {
 
         <SButton type="submit">Sign in</SButton>
       </SForm>
+
+      <SLoginSigninSuggestion>
+        Or <NavLink to="/login">login</NavLink> if you already have an account.
+      </SLoginSigninSuggestion>
     </SContainer>
   );
 }

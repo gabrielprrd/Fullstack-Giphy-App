@@ -1,5 +1,5 @@
-import React, { useRef, useContext, useEffect } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import React, { useRef, useContext } from "react";
+import { NavLink, Redirect, useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import axios from "axios";
 
@@ -16,6 +16,7 @@ import {
   SLabel,
   SForm,
   SInnerFormContainer,
+  SLoginSigninSuggestion
 } from "../../assets/globalStyles/appStyles";
 
 export default function Login(props) {
@@ -81,17 +82,22 @@ export default function Login(props) {
       {isAuth ? (
         <h1>Welcome! You're already logged in</h1>
       ) : (
-        <SForm ref={formRef} onSubmit={handleSubmit}>
-          <SInnerFormContainer>
-            <SLabel htmlFor="email">Email:</SLabel>
-            <Input type="email" name="email" />
-          </SInnerFormContainer>
-          <SInnerFormContainer>
-            <SLabel htmlFor="password">Password:</SLabel>
-            <Input type="password" name="password" />
-          </SInnerFormContainer>
-          <SButton type="submit">Log in</SButton>
-        </SForm>
+        <SContainer>
+          <SForm ref={formRef} onSubmit={handleSubmit}>
+            <SInnerFormContainer>
+              <SLabel htmlFor="email">Email:</SLabel>
+              <Input type="email" name="email" />
+            </SInnerFormContainer>
+            <SInnerFormContainer>
+              <SLabel htmlFor="password">Password:</SLabel>
+              <Input type="password" name="password" />
+            </SInnerFormContainer>
+            <SButton type="submit">Log in</SButton>
+          </SForm>
+          <SLoginSigninSuggestion>
+            Don't have an account? <NavLink to="/login">Signin</NavLink>
+          </SLoginSigninSuggestion>
+        </SContainer>
       )}
     </SContainer>
   );

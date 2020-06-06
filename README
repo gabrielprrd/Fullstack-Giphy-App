@@ -1,9 +1,6 @@
 #The Giphy App: Complete Version
 
-I should find a more creative name. Maybe take the little ghost as the mascot.
-
-The project's idea is to recreate one of my first websites, but with updated syntax, way better practices and a backend in node.js to add more features.
-
+The project's idea is to recreate one of my first websites, but with updated syntax, better practices and a backend in node.js to add more features.
 
 ##Frontend:
 To make the front end the most impressive possible, I'll take some ideas from the freefrontend website and maybe from the awwwards, but I'll make them only by myself so can improve my css skills.
@@ -15,10 +12,8 @@ https://freefrontend.com/javascript-input-text/
 ---------------------------------------------------------------------------------------------------------
 Próximas funcionalidades
 - Salvar gifs (apresenta erro se o usuário acabou de ser registrado. dá bad request e não salva)
-- Salvar gifs (só atualiza os usuários salvos quando reloga)
+- Salvar gifs (só atualiza os gifs salvos quando reloga)
 - Quando um usuário novo se cadastra, o site fica logado no último perfil
 - Botão ScrollToTop? (talvez possa ser criativo tipo o fantasminha ou aquele botão meio inclinado?)
-- Lazy loading
-- Mostrar mais gifs quando usuário atinge o fundo da página
+- Lazy loading pra cada gif individualmente
 - Checkar se ainda tá mandando o email
-- React transitions para as páginas

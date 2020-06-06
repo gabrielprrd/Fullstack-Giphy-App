@@ -2,37 +2,38 @@ import styled from "styled-components";
 import { device } from "../../../assets/globalStyles/device";
 import { SButton } from "../../../assets/globalStyles/appStyles";
 
-export const SGifsFlexContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 90vw;
-`;
-
-export const SGifsListContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  justify-content: center;
-  align-content: center;
-  margin: 40px 0px;
-
-  @media ${device.tablet} {
-    grid-template-columns: 1fr;
-    margin-top: 60px;
-  }
-`;
-
 export const SGifContainer = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0.7em;
   margin-bottom: 20px;
+  z-index: 2;
+
+  a {
+    position: absolute;
+    text-decoration: none;
+    color: var(--tertiary-color);
+    display: none;
+    cursor: pointer;
+    transition: var(--ghost-transition-time);
+
+    &:hover {
+      color: var(--secondary-color);
+      font-weight: 700;
+    }
+  }
 
   &:hover {
     button {
       transition: var(--ghost-transition-time);
       display: block;
+      z-index: 3;
+    }
+
+    a {
+      display: block;
+      z-index: 0;
     }
   }
 
@@ -48,7 +49,7 @@ export const SGifContainer = styled.div`
     cursor: pointer;
 
     &:hover {
-      opacity: 0.6;
+      opacity: 0.9;
     }
   }
 `;

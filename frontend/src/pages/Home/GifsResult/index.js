@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
 
 // Context
@@ -6,14 +7,12 @@ import { GifsContext } from "../../../store/GifsProvider";
 import { AuthContext } from "../../../store/AuthProvider";
 
 // Styles
-import { SButton } from "../../../assets/globalStyles/appStyles";
 import {
+  SButton,
   SGifsFlexContainer,
   SGifsListContainer,
-  SGifContainer,
-  SSaveButton,
-  SNoResultsFound,
-} from "./styles";
+} from "../../../assets/globalStyles/appStyles";
+import { SGifContainer, SSaveButton, SNoResultsFound } from "./styles";
 
 export default function GifsResult({ reqStatus, query, select }) {
   const { gifs, setGifs } = useContext(GifsContext);
@@ -28,8 +27,15 @@ export default function GifsResult({ reqStatus, query, select }) {
             return (
               <SGifContainer key={item.id}>
                 <img src={item.images.fixed_height.url} alt={item.title} />
-                {isAuth && (
-                  <SSaveButton onClick={() => saveGif(item)}>Save</SSaveButton>
+                {isAuth ? (
+                  <SSaveButton onClick={() => saveGif(item)}>Save {" "}
+                  <span role="img" aria-label="love">
+                    ❤️
+                  </span></SSaveButton>
+                ) : (
+                  <NavLink to="/login">
+                    Login to save your favorite gifs
+                  </NavLink>
                 )}
               </SGifContainer>
             );

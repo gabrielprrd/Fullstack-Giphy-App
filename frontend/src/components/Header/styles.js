@@ -3,6 +3,7 @@ import { device } from "../../assets/globalStyles/device";
 
 export const SHeader = styled.header`
   background: var(--primary-color);
+
   display: flex;
   flex-shrink: 0;
   justify-content: space-between;
@@ -15,6 +16,12 @@ export const SLogoContainer = styled.div`
   display: flex;
   align-items: center;
 
+  a {
+    color: var(--tertiary-color);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
   img {
     max-height: 40px;
     margin-right: 10px;
@@ -25,7 +32,7 @@ export const SNav = styled.nav`
   display: flex;
 
   a {
-    color: white;
+    color: var(--tertiary-color);
     text-decoration: none;
     margin-right: 10px;
     cursor: pointer;
