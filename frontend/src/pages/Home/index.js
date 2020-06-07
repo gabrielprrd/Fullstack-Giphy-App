@@ -1,5 +1,4 @@
 import React, { useState, useContext, useRef } from "react";
-import { Form } from "@unform/web";
 import axios from "axios";
 import * as Yup from "yup";
 
@@ -8,7 +7,7 @@ import { GifsContext } from "../../store/GifsProvider";
 import GifsResult from "./GifsResult/index";
 
 // Styles
-import { SContainer, SButton } from "../../assets/globalStyles/appStyles";
+import { SContainer } from "../../assets/globalStyles/appStyles";
 import { SGhostForm, SGhostBody, SForm, SInput, SSelect, SGhostButton } from "./styles";
 
 export default function Home() {
@@ -58,8 +57,8 @@ export default function Home() {
     <SContainer>
       <SGhostForm onFocus={toggleFocus} onBlur={toggleFocus}>
         <SGhostBody isfocused={isFocused}>
-          <div className="face" isfocused={isFocused}>
-            <div className="mouth" isfocused={isFocused} />
+          <div className="face" >
+            <div className="mouth" />
           </div>
         </SGhostBody>
 

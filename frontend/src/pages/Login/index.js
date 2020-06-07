@@ -95,7 +95,7 @@ export default function Login(props) {
             <SButton type="submit">Log in</SButton>
           </SForm>
           <SLoginSigninSuggestion>
-            Don't have an account? <NavLink to="/login">Signin</NavLink>
+            Don't have an account? <NavLink to="/signin">Signin</NavLink>
           </SLoginSigninSuggestion>
         </SContainer>
       )}

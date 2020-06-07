@@ -106,7 +106,7 @@ export const SForm = styled(Form)`
 
 export const SLoginSigninSuggestion = styled.p`
   margin-top: 20px;
-  
+
   a {
     color: var(--tertiary-color);
   }

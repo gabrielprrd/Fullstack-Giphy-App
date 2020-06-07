@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 // Components
 import Header from "./components/Header/index";
 import Footer from "./components/Footer/index";
+import Loading from "./components/Loading/index"; // lazy loading
+import ScrollTopButton from "./components/ScrollTopButton/index";
 
 // Styles
 import { GlobalStyle, AppContainer } from "./assets/globalStyles/appStyles";
@@ -14,9 +16,6 @@ import AuthProvider from "./store/AuthProvider";
 
 // Routes
 import PrivateRoute from "./store/routes";
-
-// Components
-import Loading from "./components/Loading/index"; // lazy loading
 
 // Pages
 const Home = lazy(() => import("./pages/Home/index"));
@@ -37,6 +36,7 @@ function App() {
               <Route path="/login" component={Login} />
               <Route path="/signin" component={Signin} />
               <PrivateRoute path="/user" component={User} />
+              <ScrollTopButton />
               <Footer />
             </Suspense>
           </AppContainer>

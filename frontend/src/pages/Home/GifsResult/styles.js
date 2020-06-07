@@ -46,6 +46,7 @@ export const SGifContainer = styled.div`
   img {
     max-width: 100%;
     margin-bottom: 5px;
+    border-radius: 3px;
     cursor: pointer;
 
     &:hover {
