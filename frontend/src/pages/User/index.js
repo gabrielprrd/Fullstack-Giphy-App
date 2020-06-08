@@ -1,25 +1,46 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import axios from "axios";
 
 // Styles
 import {
   SContainer,
   SGifsFlexContainer,
   SGifsListContainer,
-} from "../../assets/globalStyles/appStyles";
-
+} from "../../assets/globalStyles/containers";
 import { SUserGifContainer } from "./styles";
 
 // Context
 import { AuthContext } from "../../store/AuthProvider";
 
 export default function User() {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, setAuth } = useContext(AuthContext);
+
+  useEffect(() => {
+    const fetchFromServer = async () => {
+      try {
+        let response = await axios.get(
+          "http://localhost:5000/auth/authenticate/"
+        );
+        let { isAuthenticated, userInfo } = response.data;
+        await setUser(userInfo);
+        await setAuth(isAuthenticated);
+      } catch (err) {
+        throw new Error(err);
+      }
+    };
+
+    fetchFromServer();
+  }, []);
 
   return (
     <SContainer>
       <SGifsFlexContainer>
         <h1>Welcome, {user.name}!</h1>
-        <p>Here are the gifs you saved</p>
+        {user.gifs.length > 0 ? (
+          <p>Here are the gifs you saved</p>
+        ) : (
+          <p>You still don't have any gif saved</p>
+        )}
         <SGifsListContainer>
           {user.gifs.map((item) => {
             return (

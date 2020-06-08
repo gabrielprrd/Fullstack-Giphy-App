@@ -10,6 +10,7 @@ export default function AuthProvider({ children }) {
   const [user, setUser] = useState({});
 
   // Brings the authentication status and user object to the provider
+
   useEffect(() => {
     const fetchFromServer = async () => {
       try {

@@ -11,13 +11,15 @@ import Input from "../../components/Form/Input";
 
 // Styles
 import {
-  SContainer,
   SButton,
   SLabel,
   SForm,
+  SLoginSigninSuggestion,
+} from "../../assets/globalStyles/globalStyles";
+import {
+  SContainer,
   SInnerFormContainer,
-  SLoginSigninSuggestion
-} from "../../assets/globalStyles/appStyles";
+} from "../../assets/globalStyles/containers";
 
 export default function Login(props) {
   const { from } = props.location.state || { from: { pathname: "/" } };

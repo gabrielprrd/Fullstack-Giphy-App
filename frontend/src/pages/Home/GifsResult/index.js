@@ -7,11 +7,11 @@ import { GifsContext } from "../../../store/GifsProvider";
 import { AuthContext } from "../../../store/AuthProvider";
 
 // Styles
+import { SButton } from "../../../assets/globalStyles/globalStyles";
 import {
-  SButton,
   SGifsFlexContainer,
   SGifsListContainer,
-} from "../../../assets/globalStyles/appStyles";
+} from "../../../assets/globalStyles/containers";
 import { SGifContainer, SSaveButton, SNoResultsFound } from "./styles";
 
 export default function GifsResult({ reqStatus, query, select }) {
@@ -28,10 +28,12 @@ export default function GifsResult({ reqStatus, query, select }) {
               <SGifContainer key={item.id}>
                 <img src={item.images.fixed_height.url} alt={item.title} />
                 {isAuth ? (
-                  <SSaveButton onClick={() => saveGif(item)}>Save {" "}
-                  <span role="img" aria-label="love">
-                    ❤️
-                  </span></SSaveButton>
+                  <SSaveButton onClick={() => saveGif(item)}>
+                    Save{" "}
+                    <span role="img" aria-label="love">
+                      ❤️
+                    </span>
+                  </SSaveButton>
                 ) : (
                   <NavLink to="/login">
                     Login to save your favorite gifs

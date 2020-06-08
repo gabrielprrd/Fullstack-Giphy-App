@@ -7,8 +7,15 @@ import { GifsContext } from "../../store/GifsProvider";
 import GifsResult from "./GifsResult/index";
 
 // Styles
-import { SContainer } from "../../assets/globalStyles/appStyles";
-import { SGhostForm, SGhostBody, SForm, SInput, SSelect, SGhostButton } from "./styles";
+import { SContainer } from "../../assets/globalStyles/containers";
+import {
+  SGhostForm,
+  SGhostBody,
+  SForm,
+  SInput,
+  SSelect,
+  SGhostButton,
+} from "./styles";
 
 export default function Home() {
   const formRef = useRef(null);
@@ -57,7 +64,7 @@ export default function Home() {
     <SContainer>
       <SGhostForm onFocus={toggleFocus} onBlur={toggleFocus}>
         <SGhostBody isfocused={isFocused}>
-          <div className="face" >
+          <div className="face">
             <div className="mouth" />
           </div>
         </SGhostBody>

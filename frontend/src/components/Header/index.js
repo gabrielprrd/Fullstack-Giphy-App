@@ -15,19 +15,22 @@ import {
 import GhostLogo from "../../assets/images/ghost-logo.svg";
 
 export default function Header() {
-  const { isAuth } = useContext(AuthContext);
+  const { isAuth, setAuth, setUser } = useContext(AuthContext);
   const history = useHistory();
   const [isMenuClicked, setClick] = useState(false);
 
   async function handleClick() {
     // Logs out the user
-    axios({
-      method: "post",
-      url: "http://localhost:5000/auth/logout",
-    });
-    // Sends user to login page and reloads the page
-    await history.push("/login");
-    await window.location.reload();
+    try {
+      const response = await axios.get("http://localhost:5000/auth/logout");
+      let { isAuthenticated, userInfo } = response.data;
+      await setAuth(isAuthenticated);
+      await setUser(userInfo);
+      // Sends user to login page and reloads the page
+      await history.push("/login");
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 
   function toggleNav() {
@@ -59,14 +62,14 @@ export default function Header() {
           </a>
         ) : (
           <NavLink to="/login" onClick={hideNav}>
-            Log in
+            Login
           </NavLink>
         )}
         {isAuth ? (
           <span></span>
         ) : (
           <NavLink to="/signin" onClick={hideNav}>
-            Sign in
+            Signin
           </NavLink>
         )}
         <NavLink to="/user" onClick={hideNav}>

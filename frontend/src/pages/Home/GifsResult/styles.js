@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { device } from "../../../assets/globalStyles/device";
-import { SButton } from "../../../assets/globalStyles/appStyles";
+import { SButton } from "../../../assets/globalStyles/globalStyles";
 
 export const SGifContainer = styled.div`
   display: flex;

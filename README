@@ -11,6 +11,7 @@ https://freefrontend.com/javascript-input-text/
 
 ---------------------------------------------------------------------------------------------------------
 Próximas funcionalidades
+- Adicionar opção de delete
 - Salvar gifs (apresenta erro se o usuário acabou de ser registrado. dá bad request e não salva)
 - Salvar gifs (só atualiza os gifs salvos quando reloga)
 - Quando um usuário novo se cadastra, o site fica logado no último perfil

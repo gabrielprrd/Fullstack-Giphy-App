@@ -16,43 +16,45 @@ const generateToken = (params = {}) => {
 };
 
 let isAuthenticated = false;
-
-router.route('/register')
-.post(async (req, res) => {
-  try {
-    // Verify if the user exists by the email because is a 'unique' field
-    if (await User.findOne({ email: req.body.email })) {
-      return res.sendStatus(400).send('User already exists');
-    }
-
-    // Passes the user's info to the body of the request
-    const user = await User.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-    });
-
-    isAuthenticated = true;
-    // The password is already hashed and sent to the request, but it shouldn't return even hashed
-    user.password = undefined;
-
-    return res.status(200).send({
-      user,
-      token: generateToken({ id: user.id }),
-      isAuthenticated,
-    });
-  } catch (err) {
-    return res.status(400).send({ error: 'Registration failed' });
-  }
-})
-// Logs the user automatically after register
-.get((req, res) => {
-  return res.send({
-    isAuthenticated
-  })
-});
-
 let userInfo = {};
+
+router
+  .route('/register')
+  .post(async (req, res) => {
+    try {
+      // Verify if the user exists by the email because is a 'unique' field
+      if (await User.findOne({ email: req.body.email })) {
+        return res.sendStatus(400).send('User already exists');
+      }
+
+      // Passes the user's info to the body of the request
+      const user = await User.create({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+      });
+
+      isAuthenticated = true;
+      userInfo = user;
+      // The password is already hashed and sent to the request, but it shouldn't return even hashed
+      user.password = undefined;
+
+      return res.status(200).send({
+        user,
+        token: generateToken({ id: user.id }),
+        isAuthenticated,
+      });
+    } catch (err) {
+      return res.status(400).send({ error: 'Registration failed' });
+    }
+  })
+  // Logs the user automatically after register
+  .get((req, res) => {
+    return res.send({
+      isAuthenticated,
+      userInfo,
+    });
+  });
 
 router
   .route('/authenticate')
@@ -74,18 +76,20 @@ router
     userInfo = user;
     isAuthenticated = true;
 
-    return res.status(200).send({isAuthenticated: isAuthenticated, user: user });
+    return res
+      .status(200)
+      .send({ isAuthenticated: isAuthenticated, user: user });
   })
   .get((req, res) => {
     return res.send({
       isAuthenticated,
-      userInfo
+      userInfo,
     });
   });
 
-router.post('/logout', async (req, res) => {
+router.get('/logout', async (req, res) => {
   try {
-    return res.status(200).send((isAuthenticated = false));
+    return res.status(200).send({ isAuthenticated: false, userInfo: {} });
   } catch (err) {
     return res.status(400).send(`Logout failed: ${err}`);
   }

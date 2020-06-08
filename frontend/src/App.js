@@ -8,7 +8,8 @@ import Loading from "./components/Loading/index"; // lazy loading
 import ScrollTopButton from "./components/ScrollTopButton/index";
 
 // Styles
-import { GlobalStyle, AppContainer } from "./assets/globalStyles/appStyles";
+import { GlobalStyle } from "./assets/globalStyles/globalStyles";
+import { AppContainer } from "./assets/globalStyles/containers";
 
 // Context
 import GifsProvider from "./store/GifsProvider";

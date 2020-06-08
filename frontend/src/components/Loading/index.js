@@ -1,5 +1,5 @@
 import React from "react";
-import { SContainer } from "../../assets/globalStyles/appStyles";
+import { SContainer } from "../../assets/globalStyles/containers";
 import { SLoadingSpinner } from "./styles";
 
 export default function index() {
