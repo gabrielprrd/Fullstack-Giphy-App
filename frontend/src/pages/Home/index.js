@@ -79,7 +79,7 @@ export default function Home() {
             name="query"
             required
             placeholder="Type anything"
-            isfocused={isFocused}
+            isfocused={isFocused ? 1 : 0}
           />
           <SSelect
             name="imgType"

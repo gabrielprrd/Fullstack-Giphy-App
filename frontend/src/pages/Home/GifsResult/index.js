@@ -55,16 +55,15 @@ export default function GifsResult({ reqStatus, query, select }) {
 
   function saveGif(item) {
     let isGifRepeated = false;
-    const handleAjaxRequest = () => {
-      user.gifs.map((gif) => {
+    const handleAjaxRequest = async () => {
+      await user.gifs.forEach((gif) => {
         if (item.id === gif.id) {
-          console.log("Gif already saved");
           isGifRepeated = true;
         }
       });
 
       if (isGifRepeated === false) {
-        axios({
+        await axios({
           method: "post",
           url: `http://localhost:5000/savegif/${user._id}`,
           data: item,
@@ -72,7 +71,6 @@ export default function GifsResult({ reqStatus, query, select }) {
       }
     };
     handleAjaxRequest();
-    console.log(item);
   }
 
   function showShowMoreGifsButton() {

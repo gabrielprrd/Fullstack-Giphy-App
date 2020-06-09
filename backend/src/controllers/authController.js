@@ -51,15 +51,16 @@ router
   // Logs the user automatically after register
   .get((req, res) => {
     return res.send({
-      isAuthenticated,
       userInfo,
+      isAuthenticated,
     });
   });
 
+let userEmail;
 router
   .route('/authenticate')
   .post(async (req, res) => {
-    const { email, password, name } = req.body;
+    const { email, password } = req.body;
 
     // Finds the email and makes an exception for the password because it's a necessary data to authenticate
     const user = await User.findOne({ email }).select('+password');
@@ -73,19 +74,35 @@ router
     }
 
     user.password = undefined;
-    userInfo = user;
+    userInfo = user; 
+    if (email === undefined) {
+      return;
+    } else {
+      userEmail = email;
+    }
     isAuthenticated = true;
 
-    return res
-      .status(200)
-      .send({ isAuthenticated: isAuthenticated, user: user });
+    return res.status(200).send({ isAuthenticated, user });
   })
-  .get((req, res) => {
-    return res.send({
+  .get(async (req, res) => {
+    return res.status(200).send({
       isAuthenticated,
-      userInfo,
+      user: userInfo,
     });
   });
+
+router.post('/updateduser', async (req, res) => {
+  let { email } = req.body;
+  try {
+    let updatedUser = await User.findOne({ email });
+    return await res.status(200).send({
+      isAuthenticated,
+      user: updatedUser,
+    });
+  } catch (err) {
+    return res.status(400).send({ error: err });
+  }
+});
 
 router.get('/logout', async (req, res) => {
   try {

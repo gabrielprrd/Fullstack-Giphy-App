@@ -13,24 +13,20 @@ import { SUserGifContainer } from "./styles";
 import { AuthContext } from "../../store/AuthProvider";
 
 export default function User() {
-  const { user, setUser, setAuth } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchFromServer = async () => {
-      try {
-        let response = await axios.get(
-          "http://localhost:5000/auth/authenticate/"
-        );
-        let { isAuthenticated, userInfo } = response.data;
-        await setUser(userInfo);
-        await setAuth(isAuthenticated);
-      } catch (err) {
-        throw new Error(err);
-      }
+      let email = user.email;
+      const response = await axios({
+        method: "POST",
+        url: "http://localhost:5000/auth/updateduser/",
+        data: { email },
+      });
+      await setUser(response.data.user);
     };
-
     fetchFromServer();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <SContainer>

@@ -13,7 +13,9 @@ router.post('/savegif/:id', async (req, res) => {
       new: true,
     });
 
-    await res.status(200).send('Gif saved!');
+    const user = await User.findOne(filter);
+
+  await res.status(200).send(user);
   } catch (err) {
     return res.status(400).send({ error: err });
   }

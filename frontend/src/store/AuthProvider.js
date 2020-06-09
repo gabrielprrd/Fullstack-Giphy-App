@@ -10,21 +10,20 @@ export default function AuthProvider({ children }) {
   const [user, setUser] = useState({});
 
   // Brings the authentication status and user object to the provider
-
+  // It re-renders everytime with the page so the saved gifs are properly updated
   useEffect(() => {
     const fetchFromServer = async () => {
       try {
         let response = await axios.get(
           "http://localhost:5000/auth/authenticate/"
         );
-        let { isAuthenticated, userInfo } = response.data;
-        await setUser(userInfo);
+        let { isAuthenticated, user } = response.data;
         await setAuth(isAuthenticated);
+        await setUser(user);
       } catch (err) {
         throw new Error(err);
       }
     };
-
     fetchFromServer();
   }, []);
 

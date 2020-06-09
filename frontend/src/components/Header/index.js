@@ -13,6 +13,7 @@ import {
   SBar3,
 } from "./styles";
 import GhostLogo from "../../assets/images/ghost-logo.svg";
+import LogoutButton from "../LogoutButton/index";
 
 export default function Header() {
   const { isAuth, setAuth, setUser } = useContext(AuthContext);
@@ -52,14 +53,7 @@ export default function Header() {
           Home
         </NavLink>
         {isAuth ? (
-          <a
-            onClick={() => {
-              handleClick();
-              hideNav();
-            }}
-          >
-            Logout
-          </a>
+          <LogoutButton handleClick={handleClick} hideNav={hideNav} />
         ) : (
           <NavLink to="/login" onClick={hideNav}>
             Login
