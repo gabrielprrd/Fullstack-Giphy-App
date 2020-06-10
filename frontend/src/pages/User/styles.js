@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { device } from "../../assets/globalStyles/device";
+import { SButton } from "../../assets/globalStyles/globalStyles";
 
 export const SUserGifContainer = styled.div`
   display: flex;
@@ -18,4 +19,18 @@ export const SUserGifContainer = styled.div`
     max-width: 100%;
     margin-bottom: 5px;
   }
+
+  &:hover {
+    button {
+      transition: var(--ghost-transition-time);
+      display: block;
+      z-index: 3;
+    }
+  }
+`;
+
+export const SDeleteButton = styled(SButton)`
+  position: absolute;
+  display: none;
+  transition: var(--ghost-transition-time);
 `;

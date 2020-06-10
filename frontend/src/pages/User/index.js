@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 
 // Styles
@@ -7,26 +7,42 @@ import {
   SGifsFlexContainer,
   SGifsListContainer,
 } from "../../assets/globalStyles/containers";
-import { SUserGifContainer } from "./styles";
+import { SUserGifContainer, SDeleteButton } from "./styles";
 
 // Context
 import { AuthContext } from "../../store/AuthProvider";
 
 export default function User() {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, isAuth } = useContext(AuthContext);
+  const [isDeleted, setIsDeleted] = useState(false);
 
   useEffect(() => {
     const fetchFromServer = async () => {
       let email = user.email;
       const response = await axios({
         method: "POST",
-        url: "http://localhost:5000/auth/updateduser/",
+        url: "http://localhost:5000/auth/updatesavedgifs/",
         data: { email },
       });
       await setUser(response.data.user);
+      await console.log(isAuth);
     };
     fetchFromServer();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  function removeGif(item) {
+    axios({
+      method: "post",
+      url: `http://localhost:5000/deletegif/${user._id}`,
+      data: item,
+    });
+
+    // setIsDeleted(true);
+    const filteredState = user.gifs.filter(gif => gif.id !== item.id)
+    let updatedUser = {...user};
+    updatedUser.gifs = filteredState;
+    setUser(updatedUser);
+  }
 
   return (
     <SContainer>
@@ -42,6 +58,9 @@ export default function User() {
             return (
               <SUserGifContainer key={item.id}>
                 <img src={item.images.fixed_height.url} alt={item.title} />
+                <SDeleteButton onClick={() => removeGif(item)}>
+                  Delete
+                </SDeleteButton>
               </SUserGifContainer>
             );
           })}

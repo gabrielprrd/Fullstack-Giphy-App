@@ -74,7 +74,7 @@ router
     }
 
     user.password = undefined;
-    userInfo = user; 
+    userInfo = user;
     if (email === undefined) {
       return;
     } else {
@@ -87,22 +87,9 @@ router
   .get(async (req, res) => {
     return res.status(200).send({
       isAuthenticated,
-      user: userInfo,
+      user: userInfo, 
     });
   });
-
-router.post('/updateduser', async (req, res) => {
-  let { email } = req.body;
-  try {
-    let updatedUser = await User.findOne({ email });
-    return await res.status(200).send({
-      isAuthenticated,
-      user: updatedUser,
-    });
-  } catch (err) {
-    return res.status(400).send({ error: err });
-  }
-});
 
 router.get('/logout', async (req, res) => {
   try {
