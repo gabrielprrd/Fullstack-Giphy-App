@@ -41,7 +41,7 @@ export default function Signin() {
         abortEarly: false,
       });
 
-      // Sends data to backend as a post request
+      // Sends data to backend
       const handleRegistration = (data) => {
         axios({
           method: "post",
@@ -50,6 +50,16 @@ export default function Signin() {
         });
       };
       await handleRegistration(data);
+
+      // Sends a welcome email to the user after registration
+      const sendWelcomeEmail = (data) => {
+        axios({
+          method: "post",
+          url: "http://localhost:5000/welcome_email",
+          data: data,
+        });
+      };
+      await sendWelcomeEmail(data);
 
       // Sends user to home page and refresh it after signin
       await history.push("/");

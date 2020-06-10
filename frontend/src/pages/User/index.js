@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import axios from "axios";
 
 // Styles
@@ -14,7 +14,6 @@ import { AuthContext } from "../../store/AuthProvider";
 
 export default function User() {
   const { user, setUser, isAuth } = useContext(AuthContext);
-  const [isDeleted, setIsDeleted] = useState(false);
 
   useEffect(() => {
     const fetchFromServer = async () => {
@@ -38,8 +37,8 @@ export default function User() {
     });
 
     // setIsDeleted(true);
-    const filteredState = user.gifs.filter(gif => gif.id !== item.id)
-    let updatedUser = {...user};
+    const filteredState = user.gifs.filter((gif) => gif.id !== item.id);
+    let updatedUser = { ...user };
     updatedUser.gifs = filteredState;
     setUser(updatedUser);
   }

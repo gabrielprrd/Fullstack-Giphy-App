@@ -13,6 +13,10 @@ export const SFooter = styled.footer`
     color: var(--tertiary-color);
   }
 
+  span {
+    margin-right: 4px;
+  }
+
   @media ${device.mobileL} {
     flex-direction: column;
   }

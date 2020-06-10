@@ -87,13 +87,14 @@ router
   .get(async (req, res) => {
     return res.status(200).send({
       isAuthenticated,
-      user: userInfo, 
+      user: userInfo,
     });
   });
 
 router.get('/logout', async (req, res) => {
   try {
-    return res.status(200).send({ isAuthenticated: false, userInfo: {} });
+    isAuthenticated = false;
+    return res.status(200).send({ isAuthenticated, userInfo: {} });
   } catch (err) {
     return res.status(400).send(`Logout failed: ${err}`);
   }

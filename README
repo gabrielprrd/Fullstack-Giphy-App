@@ -11,5 +11,6 @@ https://freefrontend.com/javascript-input-text/
 
 ---------------------------------------------------------------------------------------------------------
 Próximas funcionalidades
-- Adicionar mensagens de sucesso/erro pra melhorar experiência do usuário
-- Checkar se ainda tá mandando o email
+- Adicionar mensagens de sucesso/erro pra melhorar experiência do usuário quando:
+    Usuário erra a senha
+    Usuário tenta salvar um gif já salvo
