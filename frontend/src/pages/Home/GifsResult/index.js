@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 // Context
 import { GifsContext } from "../../../store/GifsProvider";
@@ -18,6 +19,7 @@ export default function GifsResult({ reqStatus, query, select }) {
   const { gifs, setGifs } = useContext(GifsContext);
   const { isAuth, user } = useContext(AuthContext);
   const [fetchedIncrementer, setFetchedIncrementer] = useState(2);
+  const [currentGif, setCurrentGif] = useState({});
 
   function showGifs() {
     if (gifs.length > 0) {
@@ -55,6 +57,7 @@ export default function GifsResult({ reqStatus, query, select }) {
 
   function saveGif(item) {
     let isGifRepeated = false;
+    setCurrentGif(item);
     const handleAjaxRequest = async () => {
       await user.gifs.forEach((gif) => {
         if (item.id === gif.id) {
@@ -62,13 +65,19 @@ export default function GifsResult({ reqStatus, query, select }) {
         }
       });
 
-      if (isGifRepeated === false) {
-        await axios({
-          method: "post",
-          url: `http://localhost:5000/savegif/${user._id}`,
-          data: item,
-        });
+      if (item.id === currentGif.id) {
+        isGifRepeated = true;
       }
+
+      isGifRepeated
+        ? Swal.fire({
+            title: "You already saved that gif",
+          })
+        : await axios({
+            method: "post",
+            url: `http://localhost:5000/savegif/${user._id}`,
+            data: item,
+          });
     };
     handleAjaxRequest();
   }

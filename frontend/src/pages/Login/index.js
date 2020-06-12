@@ -2,6 +2,7 @@ import React, { useRef, useContext } from "react";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 // Context
 import { AuthContext } from "../../store/AuthProvider";
@@ -51,20 +52,31 @@ export default function Login(props) {
           url: "http://localhost:5000/auth/authenticate/",
           data: data,
         });
-        // Sends user to home page and refresh it after login
-        await history.push("/");
-        await window.location.reload();
       };
-      handleAuthentication(data);
+      await handleAuthentication(data);
+
+      const showModal = () => {
+        isAuth
+          ? Swal.fire({
+              icon: "success",
+              title: "You're logged in",
+            })
+          : Swal.fire({
+              icon: "error",
+              title: "Invalid email or password",
+            });
+      };
+      await showModal();
+      // Sends user to home page and refresh it after login
+      await history.push("/");
+      await window.location.reload();
 
       // If every input is valid, cleans the error messages and input fields
       formRef.current.setErrors({});
       reset();
 
       // If user is not authorized, redirects to login page
-      if (isAuth === false) {
-        return <Redirect to={from} />;
-      }
+      return <Redirect to={from} />;
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errorMessages = {};

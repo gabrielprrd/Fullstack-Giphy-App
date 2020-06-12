@@ -10,7 +10,5 @@ https://freefrontend.com/javascript-input-text/
 
 
 ---------------------------------------------------------------------------------------------------------
-Próximas funcionalidades
-- Adicionar mensagens de sucesso/erro pra melhorar experiência do usuário quando:
-    Usuário erra a senha
-    Usuário tenta salvar um gif já salvo
+Correções finais:
+-O comportamento do login modal tá errado porque ele não reconhece o isAuth como true (talvez usar um useeffect na homepage?)

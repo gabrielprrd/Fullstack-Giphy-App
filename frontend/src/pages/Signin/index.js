@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 // Components
 import Input from "../../components/Form/Input";
@@ -61,9 +62,21 @@ export default function Signin() {
       };
       await sendWelcomeEmail(data);
 
-      // Sends user to home page and refresh it after signin
-      await history.push("/");
-      await window.location.reload();
+      // Tells registration was successfull
+      const showModal = () => {
+        Swal.fire({
+          icon: "success",
+          title: "Registration complete!",
+          text: "Now you can save your favorite gifs",
+        });
+      };
+      await showModal();
+
+      // Sends user to home page and refresh it after signin after 3 seconds
+      await setTimeout(() => {
+        history.push("/");
+        window.location.reload();
+      }, 5000);
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errorMessages = {};
