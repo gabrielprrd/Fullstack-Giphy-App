@@ -25,7 +25,7 @@ import {
 export default function Login(props) {
   const { from } = props.location.state || { from: { pathname: "/" } };
   const formRef = useRef(null);
-  const { isAuth } = useContext(AuthContext);
+  const { user, isAuth } = useContext(AuthContext);
   const history = useHistory();
 
   async function handleSubmit(data, { reset }) {
@@ -47,29 +47,29 @@ export default function Login(props) {
 
       // Sends data to backend as a post request
       const handleAuthentication = async (data) => {
-        axios({
+        let response = await axios({
           method: "post",
           url: "http://localhost:5000/auth/authenticate/",
           data: data,
         });
+        console.log(response);
+        if (response.data.loginFailed) {
+          Swal.fire({
+            icon: "error",
+            title: "Wrong login or password",
+          });
+        } else {
+          Swal.fire({
+            icon: "success",
+            title: "You're logged in",
+          });
+          history.push("/");
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+        }
       };
-      await handleAuthentication(data);
-
-      const showModal = () => {
-        isAuth
-          ? Swal.fire({
-              icon: "success",
-              title: "You're logged in",
-            })
-          : Swal.fire({
-              icon: "error",
-              title: "Invalid email or password",
-            });
-      };
-      await showModal();
-      // Sends user to home page and refresh it after login
-      await history.push("/");
-      await window.location.reload();
+      handleAuthentication(data);
 
       // If every input is valid, cleans the error messages and input fields
       formRef.current.setErrors({});
@@ -94,7 +94,7 @@ export default function Login(props) {
   return (
     <SContainer>
       {isAuth ? (
-        <h1>Welcome! You're already logged in</h1>
+        <h1>Welcome, {user.name}! You're logged in</h1>
       ) : (
         <SContainer>
           <SForm ref={formRef} onSubmit={handleSubmit}>
