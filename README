@@ -1,14 +1,6 @@
 #The Giphy App: Complete Version
 
-The project's idea is to recreate one of my first websites, but with updated syntax, better practices and a backend in node.js to add more features.
+The project's idea is to recreate one of my first websites, but with updated syntax, better practices and a backend in to add more features.
 
-##Frontend:
-To make the front end the most impressive possible, I'll take some ideas from the freefrontend website and maybe from the awwwards, but I'll make them only by myself so can improve my css skills.
-IMPORTANT: check if it's reasonable do it with styled-components
-Always adopt the "component first" approach
-https://freefrontend.com/javascript-input-text/
+The application allows the user to register, search for gifs or stickers fetching the Giphy endpoint and save them. All that using the MERN (MongoDB, Express, React and Node.js) stack.
 
-
----------------------------------------------------------------------------------------------------------
-Correções finais:
--O comportamento do login modal tá errado porque ele não reconhece o isAuth como true (talvez usar um useeffect na homepage?)
