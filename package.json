@@ -1,7 +1,7 @@
 {
   "name": "giphy-complete",
   "version": "1.0.0",
-  "description": "I should find a more creative name. Maybe take the little ghost as the mascot.",
+  "description": "A fullstack application that allows the user to show gifs and save them",
   "main": "index.js",
   "scripts": {
     "dev": "concurrently cd \"cd backend && npm run server\" \"cd frontend && npm start\"",
@@ -12,8 +12,5 @@
   "devDependencies": {
     "concurrently": "^5.2.0"
   },
-  "dependencies": {
-    "styled-components": "^5.1.0",
-    "sweetalert2": "^9.14.4"
-  }
+  "dependencies": {}
 }

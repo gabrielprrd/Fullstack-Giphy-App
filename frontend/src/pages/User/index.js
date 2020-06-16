@@ -13,7 +13,7 @@ import { SUserGifContainer, SDeleteButton } from "./styles";
 import { AuthContext } from "../../store/AuthProvider";
 
 export default function User() {
-  const { user, setUser, isAuth } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchFromServer = async () => {
@@ -24,7 +24,6 @@ export default function User() {
         data: { email },
       });
       await setUser(response.data.user);
-      await console.log(isAuth);
     };
     fetchFromServer();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

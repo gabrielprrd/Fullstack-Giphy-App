@@ -52,7 +52,7 @@ export default function Login(props) {
           url: "http://localhost:5000/auth/authenticate/",
           data: data,
         });
-        console.log(response);
+
         if (response.data.loginFailed) {
           Swal.fire({
             icon: "error",
