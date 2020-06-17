@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const dbPath = 'mongodb://localhost/giphyapp';
 
 mongoose
-  .connect(dbPath, {
+  .connect(process.env.MONGODB_URI || dbPath, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
