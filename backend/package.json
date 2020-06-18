@@ -1,11 +1,11 @@
 {
   "name": "giphy-complete",
   "version": "1.0.0",
-  "description": "New version of giphy app with front and back end",
+  "description": "Giphys app backend",
   "main": "index.js",
   "scripts": {
     "server": "nodemon src/index.js",
-    "start": "node src/index.js",
+    "start": "cd src && node index.js",
     "test": "set DEBUG=express:* & node src/index.js"
   },
   "author": "Gabriska",
