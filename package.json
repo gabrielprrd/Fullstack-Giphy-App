@@ -4,7 +4,8 @@
   "description": "A fullstack application that allows the user to show gifs and save them",
   "main": "index.js",
   "engines": {
-    "node": "12.x"
+    "node": "12.x",
+    "npm": "6.x"
   },
   "scripts": {
     "dev": "concurrently cd \"cd backend && npm run server\" \"cd frontend && npm start\"",
