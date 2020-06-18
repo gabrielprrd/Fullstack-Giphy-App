@@ -6,7 +6,7 @@ const mongoose = require('./database');
 const cors = require('cors');
 
 // Enviroment variables that can't be shown on git
-const result = require('dotenv').config(path.join(__dirname, '..', '.env'));
+const result = require('dotenv').config();
 if (result.error) {
   throw result.error;
 }
