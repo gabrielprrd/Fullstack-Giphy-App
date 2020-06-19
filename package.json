@@ -13,6 +13,7 @@
     "install-frontend": "cd frontend && npm install",
     "start": "cd backend && npm start",
     "install-backend": "cd backend && npm install",
+    "exec-backend": "npm run install-backend && npm start",
     "heroku-postbuild": "npm run install-frontend && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
