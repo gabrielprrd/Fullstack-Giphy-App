@@ -1,4 +1,4 @@
-node_modules/
+/node_modules
 .env
 .cache
-./src/database/db.js
+./src/database/index.js

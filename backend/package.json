@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon src/index.js",
-    "start": "cd src && node index.js",
+    "start": "node ./src/index.js",
     "test": "set DEBUG=express:* & node src/index.js"
   },
   "author": "Gabriska",
